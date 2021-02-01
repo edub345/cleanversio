@@ -1,0 +1,4450 @@
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 13);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+class Constants {
+  // Named Constants
+  // Helper Functions
+  static filterMethodName(id) {
+    return this.nameById(this.FilterMethods, id);
+  }
+
+  static matchMethodName(id) {
+    return this.nameById(this.MatchMethods, id);
+  }
+
+  static nameById(obj, id) {
+    return Object.entries(obj).filter(arr => arr[1] === id)[0][0];
+  }
+
+  static orderedArray(obj) {
+    let result = [];
+    Object.values(obj).sort().forEach(id => {
+      result.push(Constants.nameById(obj, id));
+    });
+    return result;
+  }
+
+}
+
+exports.default = Constants;
+
+_defineProperty(Constants, "DomainModes", {
+  Normal: 0,
+  Advanced: 1,
+  Deep: 2
+});
+
+_defineProperty(Constants, "FilterMethods", {
+  Censor: 0,
+  Substitute: 1,
+  Remove: 2
+});
+
+_defineProperty(Constants, "MatchMethods", {
+  Exact: 0,
+  Partial: 1,
+  Whole: 2,
+  Regex: 3
+});
+
+_defineProperty(Constants, "MuteMethods", {
+  Tab: 0,
+  Video: 1,
+  None: 2
+});
+
+_defineProperty(Constants, "ShowSubtitles", {
+  All: 0,
+  Filtered: 1,
+  Unfiltered: 2,
+  None: 3
+});
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.dynamicList = dynamicList;
+exports.escapeHTML = escapeHTML;
+exports.exportToFile = exportToFile;
+exports.formatNumber = formatNumber;
+exports.getGlobalVariable = getGlobalVariable;
+exports.getVersion = getVersion;
+exports.hmsToSeconds = hmsToSeconds;
+exports.injectScript = injectScript;
+exports.isVersionOlder = isVersionOlder;
+exports.makeRequest = makeRequest;
+exports.readFile = readFile;
+exports.removeChildren = removeChildren;
+exports.removeFromArray = removeFromArray;
+exports.secondsToHMS = secondsToHMS;
+
+/* istanbul ignore next */
+function dynamicList(list, select, title) {
+  removeChildren(select);
+  let array = title !== undefined ? [title].concat(list) : list;
+  array.forEach(item => {
+    let option = document.createElement('option');
+    option.value = title && item === title ? '' : item;
+    option.textContent = item;
+    select.appendChild(option);
+  });
+}
+
+function escapeHTML(str) {
+  return str.replace(/([<>&"'])/g, (match, p1) => ({
+    '<': '&lt;',
+    '>': '&gt;',
+    '&': '&amp;',
+    '"': '&quot;',
+    "'": '&apos;'
+  })[p1]);
+}
+
+function exportToFile(dataStr, fileName = 'data.txt') {
+  let dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+  let linkElement = document.createElement('a');
+  linkElement.setAttribute('href', dataUri);
+  linkElement.setAttribute('download', fileName);
+  linkElement.click();
+  linkElement.remove();
+} // Format numbers up to 1B to be 4 characters or less
+
+
+function formatNumber(number) {
+  let length = number.toString().length;
+
+  if (length <= 3) {
+    // 0 - 999
+    return number.toString();
+  } else if (length <= 6) {
+    // 1,000 - 999,999
+    let n = (number / 1000).toPrecision();
+    let index = n.indexOf('.');
+    return (index >= -1 && index <= 1 ? n.substr(0, 3) : n.substr(0, index)) + 'k';
+  } else if (length <= 9) {
+    // 1,000,000 - 999,999,999
+    let n = (number / 1000000).toPrecision();
+    let index = n.indexOf('.');
+    return (index >= -1 && index <= 1 ? n.substr(0, 3) : n.substr(0, index)) + 'M';
+  } else {
+    // >= 1,000,000,000
+    return '1G+';
+  }
+}
+
+function getGlobalVariable(code, id = 'APFData') {
+  let script = document.createElement('script');
+  script.id = id;
+  script.textContent = `document.getElementById("${id}").textContent = JSON.stringify(${code})`;
+  document.documentElement.appendChild(script);
+  let result = document.querySelector(`script#${id}`).textContent;
+  script.remove();
+  return JSON.parse(result);
+} // /^\d+\.\d+\.\d+$/
+
+
+function getVersion(version) {
+  let versionValues = version.split('.');
+  return {
+    major: parseInt(versionValues[0]),
+    minor: parseInt(versionValues[1]),
+    patch: parseInt(versionValues[2])
+  };
+} // NOTE: This function requires the hh:mm:ss.ff format
+
+
+function hmsToSeconds(timeStr, precision = 3) {
+  let [hh = '0', mm = '0', ss = '0'] = (timeStr || '0:0:0').split(':');
+  let hour = parseInt(hh, 10) || 0;
+  let minute = parseInt(mm, 10) || 0;
+  let second = parseFloat(ss) || 0;
+  return parseFloat((hour * 3600 + minute * 60 + second).toFixed(precision));
+}
+
+function injectScript(file, node, id = '') {
+  var th = document.getElementsByTagName(node)[0];
+  var s = document.createElement('script');
+  s.setAttribute('type', 'text/javascript');
+
+  if (id) {
+    s.id = id;
+  }
+
+  s.setAttribute('src', file);
+  th.appendChild(s);
+} // Is the provided version lower than the minimum version?
+
+
+function isVersionOlder(version, minimum) {
+  if (version.major < minimum.major) {
+    return true;
+  } else if (version.major == minimum.major && version.minor < minimum.minor) {
+    return true;
+  } else if (version.major == minimum.major && version.minor == minimum.minor && version.patch < minimum.patch) {
+    return true;
+  }
+
+  return false;
+}
+
+function makeRequest(method, url) {
+  return new Promise(function (resolve, reject) {
+    let xhr = new XMLHttpRequest();
+    xhr.open(method, url);
+
+    xhr.onload = function () {
+      if (this.status >= 200 && this.status < 300) {
+        resolve(xhr.response);
+      } else {
+        reject({
+          status: this.status,
+          statusText: xhr.statusText
+        });
+      }
+    };
+
+    xhr.onerror = function () {
+      reject({
+        status: this.status,
+        statusText: xhr.statusText
+      });
+    };
+
+    xhr.send();
+  });
+}
+
+function readFile(file) {
+  return new Promise((resolve, reject) => {
+    let fr = new FileReader();
+
+    fr.onload = () => {
+      resolve(fr.result);
+    };
+
+    fr.readAsText(file);
+  });
+}
+
+function removeChildren(element) {
+  if (element.hasChildNodes) {
+    while (element.firstChild) {
+      element.firstChild.remove();
+    }
+  }
+}
+
+function removeFromArray(array, element) {
+  return array.filter(e => e !== element);
+}
+
+function secondsToHMS(seconds) {
+  return new Date(seconds * 1000).toISOString().substr(11, 12);
+}
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _constants = _interopRequireDefault(__webpack_require__(0));
+
+var _config = _interopRequireDefault(__webpack_require__(3));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+class WebConfig extends _config.default {
+  // https://developer.chrome.com/apps/storage chrome.storage.sync.QUOTA_BYTES_PER_ITEM
+  static async build(keys = []) {
+    if (typeof keys === 'string') {
+      keys = [keys];
+    }
+
+    let asyncResult = await WebConfig.getConfig(keys);
+    let instance = new WebConfig(asyncResult);
+    return instance;
+  } // Call build() to create a new instance
+
+
+  constructor(asyncParam) {
+    if (typeof asyncParam === 'undefined') {
+      throw new Error('Cannot be called directly. call build()');
+    }
+
+    super(); // Get the Config defaults
+
+    _defineProperty(this, "_splitContainerKeys", void 0);
+
+    _defineProperty(this, "audioWordlistId", void 0);
+
+    _defineProperty(this, "customAudioSites", void 0);
+
+    _defineProperty(this, "domains", void 0);
+
+    _defineProperty(this, "enabledDomainsOnly", void 0);
+
+    _defineProperty(this, "muteAudio", void 0);
+
+    _defineProperty(this, "muteAudioOnly", void 0);
+
+    _defineProperty(this, "muteCueRequireShowing", void 0);
+
+    _defineProperty(this, "muteMethod", void 0);
+
+    _defineProperty(this, "password", void 0);
+
+    _defineProperty(this, "showSubtitles", void 0);
+
+    _defineProperty(this, "showUpdateNotification", void 0);
+
+    _defineProperty(this, "youTubeAutoSubsMax", void 0);
+
+    _defineProperty(this, "youTubeAutoSubsMin", void 0);
+
+    this._splitContainerKeys = {};
+    Object.assign(this, WebConfig._classDefaults, asyncParam); // Separate due to _defineProperty()
+  } // Combine all ._[prop]* into .[prop]
+
+
+  static combineData(data, prop) {
+    data[prop] = {};
+
+    if (data[`_${prop}0`] !== undefined) {
+      let dataKeys = WebConfig.getDataContainerKeys(data, prop); // Add all _[prop]* to .[prop] and remove _[prop]*
+
+      dataKeys.forEach(function (key) {
+        Object.assign(data[prop], data[key]);
+        delete data[key];
+      });
+      return dataKeys;
+    }
+  } // Async call to get provided keys (or default keys) from chrome storage
+
+
+  static getConfig(keys) {
+    return new Promise(function (resolve, reject) {
+      let request = null; // Get all data from storage
+
+      if (keys.length > 0 && !keys.some(key => WebConfig._splittingKeys.includes(key))) {
+        request = {};
+        keys.forEach(key => {
+          request[key] = WebConfig._defaults[key];
+        });
+      }
+
+      chrome.storage.sync.get(request, function (items) {
+        // Add internal tracker for split keys
+        items._splitContainerKeys = {}; // Ensure defaults for undefined settings
+
+        Object.keys(WebConfig._defaults).forEach(function (defaultKey) {
+          if ((request == null || keys.includes(defaultKey)) && items[defaultKey] === undefined) {
+            items[defaultKey] = WebConfig._defaults[defaultKey];
+          }
+        }); // Add words if requested, and provide _defaultWords if needed
+
+        if (keys.length === 0 || keys.includes('words')) {
+          // Use default words if none were provided
+          if (items._words0 === undefined || Object.keys(items._words0).length == 0) {
+            items._words0 = _config.default._defaultWords;
+          }
+        }
+
+        WebConfig._splittingKeys.forEach(function (splittingKey) {
+          let keys = WebConfig.combineData(items, splittingKey);
+
+          if (keys) {
+            items._splitContainerKeys[splittingKey] = keys;
+          }
+        }); // Remove keys we didn't request (Required when requests for specific keys include ones that supports splitting)
+
+
+        if (request !== null && keys.length > 0) {
+          Object.keys(items).forEach(function (item) {
+            if (!keys.includes(item)) {
+              delete items[item];
+            }
+          });
+        }
+
+        resolve(items);
+      });
+    });
+  } // Find all _[prop]* to combine
+
+
+  static getDataContainerKeys(data, prop) {
+    let pattern = new RegExp(`^_${prop}\\d+`);
+    let containerKeys = Object.keys(data).filter(function (key) {
+      return pattern.test(key);
+    });
+    return containerKeys;
+  } // Order and remove `_` prefixed values
+
+
+  ordered() {
+    let self = this;
+    return Object.keys(self).sort().reduce((obj, key) => {
+      if (key[0] != '_') {
+        obj[key] = self[key];
+      }
+
+      return obj;
+    }, {});
+  }
+
+  remove(props) {
+    let self = this;
+
+    if (typeof props === 'string') {
+      props = [props];
+    }
+
+    chrome.storage.sync.remove(props);
+    props.forEach(function (prop) {
+      delete self[prop];
+    });
+  }
+
+  reset() {
+    return new Promise(function (resolve, reject) {
+      chrome.storage.sync.clear(function () {
+        resolve(chrome.runtime.lastError ? 1 : 0);
+      });
+    });
+  } // Pass a key or array of keys to save, or save everything
+
+
+  save(props = []) {
+    let self = this;
+
+    if (typeof props === 'string') {
+      props = [props];
+    }
+
+    let data = {}; // Save everything
+
+    if (props.length === 0) {
+      props = Object.keys(WebConfig._defaults);
+      props.push('words'); // words is not part of _defaults
+    }
+
+    props.forEach(function (prop) {
+      if (WebConfig._splittingKeys.includes(prop)) {
+        Object.assign(data, self.splitData(prop));
+      } else {
+        data[prop] = self[prop];
+      }
+    }); // If we have more containers in storage than are needed, remove them
+
+    if (Object.keys(self._splitContainerKeys).length !== 0 && props.some(prop => WebConfig._splittingKeys.includes(prop))) {
+      WebConfig._splittingKeys.forEach(function (splittingKey) {
+        if (props.includes(splittingKey)) {
+          let newContainerKeys = WebConfig.getDataContainerKeys(data, splittingKey);
+
+          if (self._splitContainerKeys[splittingKey]) {
+            let containersToRemove = self._splitContainerKeys[splittingKey].filter(oldKey => !newContainerKeys.includes(oldKey));
+
+            if (containersToRemove.length !== 0) {
+              self.remove(containersToRemove);
+              self._splitContainerKeys[splittingKey] = newContainerKeys;
+            }
+          }
+        }
+      });
+    }
+
+    return new Promise(function (resolve, reject) {
+      chrome.storage.sync.set(data, function () {
+        resolve(chrome.runtime.lastError ? 1 : 0);
+      });
+    });
+  }
+
+  splitData(key) {
+    let self = this;
+    const encoder = new TextEncoder();
+    let currentContainerNum = 0;
+    let currentBytes = 2; // For double-quotes around entire stringified JSON
+
+    let data = {};
+    let currentContainer = `_${key}${currentContainerNum}`;
+    data[currentContainer] = {};
+    currentBytes += encoder.encode(`{"${currentContainer}":{}}`).length;
+    Object.keys(self[key]).sort().forEach(function (item) {
+      let newBytes = encoder.encode(`",${item}":`).length; // This leads to an extra ',' for the last entry
+
+      newBytes += encoder.encode(JSON.stringify(self[key][item])).length; // Next word would be too big, setup next container
+
+      if (currentBytes + newBytes >= WebConfig._maxBytes) {
+        currentContainerNum++;
+        currentContainer = `_${key}${currentContainerNum}`;
+        data[currentContainer] = {};
+        currentBytes = encoder.encode(`"${currentContainer}":{}`).length;
+      } // Adding a word
+
+
+      currentBytes += newBytes;
+      data[currentContainer][item] = self[key][item];
+    });
+    return data;
+  }
+
+}
+
+exports.default = WebConfig;
+
+_defineProperty(WebConfig, "_classDefaults", {
+  domains: {},
+  audioWordlistId: 0,
+  customAudioSites: null,
+  enabledDomainsOnly: false,
+  muteAudio: false,
+  muteAudioOnly: false,
+  muteCueRequireShowing: false,
+  muteMethod: _constants.default.MuteMethods.Tab,
+  password: null,
+  showSubtitles: _constants.default.ShowSubtitles.All,
+  showUpdateNotification: true,
+  youTubeAutoSubsMax: 0,
+  youTubeAutoSubsMin: 0
+});
+
+_defineProperty(WebConfig, "QUOTA_BYTES_PER_ITEM", 8192);
+
+_defineProperty(WebConfig, "_defaults", Object.assign({}, _config.default._defaults, WebConfig._classDefaults));
+
+_defineProperty(WebConfig, "_splittingKeys", ['domains', 'words']);
+
+_defineProperty(WebConfig, "_maxBytes", 8000);
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _constants = _interopRequireDefault(__webpack_require__(0));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+class Config {
+  constructor(data = {}) {
+    _defineProperty(this, "censorCharacter", void 0);
+
+    _defineProperty(this, "censorFixedLength", void 0);
+
+    _defineProperty(this, "defaultSubstitution", void 0);
+
+    _defineProperty(this, "defaultWordMatchMethod", void 0);
+
+    _defineProperty(this, "defaultWordRepeat", void 0);
+
+    _defineProperty(this, "defaultWordSeparators", void 0);
+
+    _defineProperty(this, "filterMethod", void 0);
+
+    _defineProperty(this, "filterWordList", void 0);
+
+    _defineProperty(this, "iWordWhitelist", void 0);
+
+    _defineProperty(this, "preserveCase", void 0);
+
+    _defineProperty(this, "preserveFirst", void 0);
+
+    _defineProperty(this, "preserveLast", void 0);
+
+    _defineProperty(this, "showCounter", void 0);
+
+    _defineProperty(this, "showSummary", void 0);
+
+    _defineProperty(this, "substitutionMark", void 0);
+
+    _defineProperty(this, "wordlistId", void 0);
+
+    _defineProperty(this, "wordlists", void 0);
+
+    _defineProperty(this, "wordlistsEnabled", void 0);
+
+    _defineProperty(this, "words", void 0);
+
+    _defineProperty(this, "wordWhitelist", void 0);
+
+    Object.assign(this, Config._defaults, data);
+  }
+
+  addWord(str, options = this.defaultWordOptions()) {
+    str = str.trim();
+    options = Object.assign({}, this.defaultWordOptions(), options);
+
+    if (options.matchMethod !== _constants.default.MatchMethods.Regex) {
+      str = str.toLowerCase();
+    }
+
+    if (Object.keys(this.words).includes(str)) {
+      return false; // Already exists
+    } else {
+      options.sub = options.sub.trim().toLowerCase();
+      this.words[str] = options;
+      return true;
+    }
+  }
+
+  defaultWordOptions() {
+    return {
+      lists: [],
+      matchMethod: this.defaultWordMatchMethod,
+      repeat: this.defaultWordRepeat,
+      separators: this.defaultWordSeparators,
+      sub: ''
+    };
+  }
+
+  removeWord(str) {
+    str = str.trim();
+    const lower = str.toLowerCase();
+
+    if (Object.keys(this.words).includes(lower)) {
+      delete this.words[lower];
+      return true;
+    } else if (this.words[str]) {
+      delete this.words[str];
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  repeatForWord(word) {
+    if (this.words[word].repeat === true || this.words[word].repeat === false) {
+      return this.words[word].repeat;
+    } else {
+      return this.defaultWordRepeat;
+    }
+  }
+
+  sanitizeWords() {
+    let sanitizedWords = {};
+    Object.keys(this.words).sort().forEach(key => {
+      sanitizedWords[key.trim().toLowerCase()] = this.words[key];
+    });
+    this.words = sanitizedWords;
+  }
+
+}
+
+exports.default = Config;
+
+_defineProperty(Config, "_allWordlists", ['All words']);
+
+_defineProperty(Config, "_defaults", {
+  censorCharacter: '*',
+  censorFixedLength: 0,
+  defaultSubstitution: 'censored',
+  defaultWordMatchMethod: _constants.default.MatchMethods.Exact,
+  defaultWordRepeat: false,
+  defaultWordSeparators: false,
+  filterMethod: _constants.default.FilterMethods.Substitute,
+  filterWordList: true,
+  iWordWhitelist: [],
+  preserveCase: true,
+  preserveFirst: true,
+  preserveLast: false,
+  showCounter: true,
+  showSummary: true,
+  substitutionMark: false,
+  wordlistId: 0,
+  wordlists: ['Wordlist 1', 'Wordlist 2', 'Wordlist 3', 'Wordlist 4', 'Wordlist 5', 'Wordlist 6'],
+  wordlistsEnabled: true,
+  wordWhitelist: []
+});
+
+_defineProperty(Config, "_defaultWords", {
+  'ass': {
+    lists: [],
+    matchMethod: _constants.default.MatchMethods.Exact,
+    repeat: true,
+    separators: false,
+    sub: 'butt'
+  },
+  'asses': {
+    lists: [],
+    matchMethod: _constants.default.MatchMethods.Exact,
+    repeat: false,
+    separators: false,
+    sub: 'butts'
+  },
+  'asshole': {
+    lists: [],
+    matchMethod: _constants.default.MatchMethods.Partial,
+    repeat: true,
+    separators: false,
+    sub: 'jerk'
+  },
+  'badass': {
+    lists: [],
+    matchMethod: _constants.default.MatchMethods.Partial,
+    repeat: true,
+    separators: true,
+    sub: 'cool'
+  },
+  'bastard': {
+    lists: [],
+    matchMethod: _constants.default.MatchMethods.Partial,
+    repeat: true,
+    separators: false,
+    sub: 'idiot'
+  },
+  'bitch': {
+    lists: [],
+    matchMethod: _constants.default.MatchMethods.Partial,
+    repeat: true,
+    separators: false,
+    sub: 'bench'
+  },
+  'cocksucker': {
+    lists: [],
+    matchMethod: _constants.default.MatchMethods.Partial,
+    repeat: true,
+    separators: true,
+    sub: 'suckup'
+  },
+  'cunt': {
+    lists: [],
+    matchMethod: _constants.default.MatchMethods.Partial,
+    repeat: true,
+    separators: false,
+    sub: 'expletive'
+  },
+  'dammit': {
+    lists: [],
+    matchMethod: _constants.default.MatchMethods.Partial,
+    repeat: false,
+    separators: true,
+    sub: 'dangit'
+  },
+  'damn': {
+    lists: [],
+    matchMethod: _constants.default.MatchMethods.Partial,
+    repeat: false,
+    separators: false,
+    sub: 'dang'
+  },
+  'dumbass': {
+    lists: [],
+    matchMethod: _constants.default.MatchMethods.Partial,
+    repeat: true,
+    separators: false,
+    sub: 'idiot'
+  },
+  'fag': {
+    lists: [],
+    matchMethod: _constants.default.MatchMethods.Exact,
+    repeat: true,
+    separators: false,
+    sub: 'gay'
+  },
+  'faggot': {
+    lists: [],
+    matchMethod: _constants.default.MatchMethods.Partial,
+    repeat: true,
+    separators: false,
+    sub: 'gay'
+  },
+  'fags': {
+    lists: [],
+    matchMethod: _constants.default.MatchMethods.Exact,
+    repeat: true,
+    separators: false,
+    sub: 'gays'
+  },
+  'fuck': {
+    lists: [],
+    matchMethod: _constants.default.MatchMethods.Partial,
+    repeat: true,
+    separators: true,
+    sub: 'freak'
+  },
+  'goddammit': {
+    lists: [],
+    matchMethod: _constants.default.MatchMethods.Partial,
+    repeat: true,
+    separators: true,
+    sub: 'dangit'
+  },
+  'hell': {
+    lists: [],
+    matchMethod: _constants.default.MatchMethods.Exact,
+    repeat: false,
+    separators: false,
+    sub: 'heck'
+  },
+  'jackass': {
+    lists: [],
+    matchMethod: _constants.default.MatchMethods.Partial,
+    repeat: true,
+    separators: true,
+    sub: 'jerk'
+  },
+  'nigga': {
+    lists: [],
+    matchMethod: _constants.default.MatchMethods.Exact,
+    repeat: true,
+    separators: false,
+    sub: 'bruh'
+  },
+  'nigger': {
+    lists: [],
+    matchMethod: _constants.default.MatchMethods.Exact,
+    repeat: true,
+    separators: false,
+    sub: 'man'
+  },
+  'niggers': {
+    lists: [],
+    matchMethod: _constants.default.MatchMethods.Exact,
+    repeat: true,
+    separators: false,
+    sub: 'people'
+  },
+  'piss': {
+    lists: [],
+    matchMethod: _constants.default.MatchMethods.Partial,
+    repeat: true,
+    separators: false,
+    sub: 'pee'
+  },
+  'pissed': {
+    lists: [],
+    matchMethod: _constants.default.MatchMethods.Partial,
+    repeat: true,
+    separators: false,
+    sub: 'ticked'
+  },
+  'pussies': {
+    lists: [],
+    matchMethod: _constants.default.MatchMethods.Exact,
+    repeat: true,
+    separators: false,
+    sub: 'softies'
+  },
+  'pussy': {
+    lists: [],
+    matchMethod: _constants.default.MatchMethods.Exact,
+    repeat: true,
+    separators: false,
+    sub: 'softie'
+  },
+  'shit': {
+    lists: [],
+    matchMethod: _constants.default.MatchMethods.Partial,
+    repeat: true,
+    separators: false,
+    sub: 'crap'
+  },
+  'slut': {
+    lists: [],
+    matchMethod: _constants.default.MatchMethods.Partial,
+    repeat: true,
+    separators: false,
+    sub: 'tramp'
+  },
+  'tits': {
+    lists: [],
+    matchMethod: _constants.default.MatchMethods.Partial,
+    repeat: true,
+    separators: false,
+    sub: 'chest'
+  },
+  'twat': {
+    lists: [],
+    matchMethod: _constants.default.MatchMethods.Exact,
+    repeat: true,
+    separators: false,
+    sub: 'dumbo'
+  },
+  'twats': {
+    lists: [],
+    matchMethod: _constants.default.MatchMethods.Exact,
+    repeat: true,
+    separators: false,
+    sub: 'dumbos'
+  },
+  'whore': {
+    lists: [],
+    matchMethod: _constants.default.MatchMethods.Partial,
+    repeat: true,
+    separators: false,
+    sub: 'tramp'
+  }
+});
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _constants = _interopRequireDefault(__webpack_require__(0));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+class Domain {
+  static byHostname(hostname, domains) {
+    let cfgKey = Domain.findDomainKey(hostname, domains) || hostname;
+    let domain = Domain.byKey(cfgKey, domains);
+    domain.hostname = hostname;
+    return domain;
+  }
+
+  static byKey(key, domains) {
+    return new Domain(key, domains[key]);
+  }
+
+  static findDomainKey(hostname, domains) {
+    let sorted = Object.keys(domains).sort((a, b) => {
+      return b.length - a.length;
+    });
+    return sorted.find(key => new RegExp(`(^|.)${key}$`).test(hostname));
+  }
+
+  static getCurrentTab() {
+    /* istanbul ignore next */
+    return new Promise(function (resolve, reject) {
+      chrome.tabs.query({
+        active: true,
+        currentWindow: true
+      }, function (tabs) {
+        resolve(tabs[0]);
+      });
+    });
+  }
+
+  static sortedKeys(domains) {
+    return Object.keys(domains).sort(function (a, b) {
+      let domainA = a.match(/\w*\.\w*$/)[0];
+      let domainB = b.match(/\w*\.\w*$/)[0];
+      return domainA < domainB ? -1 : domainA > domainB ? 1 : 0;
+    });
+  }
+
+  constructor(key, domainCfg) {
+    _defineProperty(this, "advanced", void 0);
+
+    _defineProperty(this, "audioWordlistId", void 0);
+
+    _defineProperty(this, "cfg", void 0);
+
+    _defineProperty(this, "cfgKey", void 0);
+
+    _defineProperty(this, "deep", void 0);
+
+    _defineProperty(this, "disabled", void 0);
+
+    _defineProperty(this, "enabled", void 0);
+
+    _defineProperty(this, "hostname", void 0);
+
+    _defineProperty(this, "tab", void 0);
+
+    _defineProperty(this, "wordlistId", void 0);
+
+    this.cfgKey = key;
+    this.cfg = {};
+
+    if (!domainCfg) {
+      Object.assign(this.cfg, Domain._domainCfgDefaults);
+    } else {
+      this.cfg = domainCfg;
+    }
+
+    this.updateFromCfg();
+  }
+
+  getModeIndex() {
+    if (this.advanced) {
+      return _constants.default.DomainModes.Advanced;
+    } else if (this.deep) {
+      return _constants.default.DomainModes.Deep;
+    } else {
+      return _constants.default.DomainModes.Normal;
+    }
+  } // Updates the config from the domain and saves it
+
+
+  async save(cfg) {
+    if (cfg.domains) {
+      this.updateCfg();
+
+      if (JSON.stringify(this.cfg) === '{}') {
+        // Nothing to save, so remove it
+        delete cfg.domains[this.cfgKey];
+      } else {
+        cfg.domains[this.cfgKey] = this.cfg;
+      }
+
+      return await cfg.save('domains');
+    }
+  }
+
+  updateCfg() {
+    this.cfg.adv = this.advanced === true ? true : undefined;
+    this.cfg.deep = this.deep === true ? true : undefined;
+    this.cfg.disabled = this.disabled === true ? true : undefined;
+    this.cfg.enabled = this.enabled === true ? true : undefined;
+    this.cfg.wordlist = this.wordlistId >= 0 ? this.wordlistId : undefined;
+    this.cfg.audioList = this.audioWordlistId >= 0 ? this.audioWordlistId : undefined;
+  }
+
+  updateFromCfg() {
+    this.advanced = this.cfg.adv;
+    this.deep = this.cfg.deep;
+    this.disabled = this.cfg.disabled;
+    this.enabled = this.cfg.enabled;
+    this.wordlistId = this.cfg.wordlist;
+    this.audioWordlistId = this.cfg.audioList;
+  }
+
+  updateFromModeIndex(index) {
+    switch (index) {
+      case _constants.default.DomainModes.Normal:
+        this.advanced = false;
+        this.deep = false;
+        break;
+
+      case _constants.default.DomainModes.Advanced:
+        this.advanced = true;
+        this.deep = false;
+        break;
+
+      case _constants.default.DomainModes.Deep:
+        this.advanced = false;
+        this.deep = true;
+        break;
+    }
+  }
+
+}
+
+exports.default = Domain;
+
+_defineProperty(Domain, "_domainCfgDefaults", {
+  adv: undefined,
+  audioList: undefined,
+  deep: undefined,
+  disabled: undefined,
+  enabled: undefined,
+  wordlist: undefined
+});
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _constants = _interopRequireDefault(__webpack_require__(0));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+class Word {
+  static allLowerCase(string) {
+    return string.toLowerCase() === string;
+  }
+
+  static allUpperCase(string) {
+    return string.toUpperCase() === string;
+  }
+
+  static capitalize(string) {
+    return string.charAt(0).toUpperCase() + string.substr(1);
+  }
+
+  static capitalized(string) {
+    return string.charAt(0).toUpperCase() === string.charAt(0);
+  }
+
+  static containsDoubleByte(str) {
+    if (!str.length) return false;
+    if (str.charCodeAt(0) > 127) return true;
+    return Word._unicodeRegExp.test(str);
+  } // /[-\/\\^$*+?.()|[\]{}]/g
+  // /[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g
+  // Removing '-' for '/пресс-релиз/, giu'
+
+
+  static escapeRegExp(str) {
+    return str.replace(Word._escapeRegExp, '\\$&');
+  }
+
+  constructor(word, options, cfg) {
+    _defineProperty(this, "_filterMethod", void 0);
+
+    _defineProperty(this, "escaped", void 0);
+
+    _defineProperty(this, "lists", void 0);
+
+    _defineProperty(this, "matchMethod", void 0);
+
+    _defineProperty(this, "matchRepeated", void 0);
+
+    _defineProperty(this, "matchSeparators", void 0);
+
+    _defineProperty(this, "regExp", void 0);
+
+    _defineProperty(this, "sub", void 0);
+
+    _defineProperty(this, "unicode", void 0);
+
+    _defineProperty(this, "value", void 0);
+
+    this.value = word;
+    this.lists = options.lists === undefined ? [] : options.lists;
+    this.matchMethod = options.matchMethod === undefined ? cfg.defaultWordMatchMethod : options.matchMethod;
+    this.matchRepeated = options.repeat === undefined ? cfg.defaultWordRepeat : options.repeat;
+    this.matchSeparators = options.separators === undefined ? cfg.defaultWordSeparators : options.separators;
+    this.sub = options.sub === undefined ? cfg.defaultSubstitution : options.sub;
+    this._filterMethod = options._filterMethod === undefined ? cfg.filterMethod : options._filterMethod;
+    this.unicode = Word.containsDoubleByte(word);
+    this.escaped = this.matchMethod === _constants.default.MatchMethods.Regex ? this.value : Word.escapeRegExp(this.value); // Don't escape a RegExp
+
+    this.regExp = this.buildRegExp();
+  }
+
+  buildRegExp() {
+    let word = this;
+
+    try {
+      switch (word.matchMethod) {
+        case _constants.default.MatchMethods.Partial:
+          if (word._filterMethod === _constants.default.FilterMethods.Remove) {
+            // Match entire word that contains sub-string and surrounding whitespace
+            // /\s?\b[\w-]*word[\w-]*\b\s?/gi
+            if (word.unicode) {
+              // Work around for lack of word boundary support for unicode characters
+              // /(^|[\s.,'"+!?|-]?)[\w-]*(word)[\w-]*([\s.,'"+!?|-]?|$)/giu
+              return new RegExp('(^|' + Word._unicodeWordBoundary + '?)([\\w-]*' + word.processedPhrase() + '[\\w-]*)(' + Word._unicodeWordBoundary + '?|$)', word.regexOptions());
+            } else if (word.hasEdgePunctuation()) {
+              // Begin or end with punctuation (not \w))
+              return new RegExp('(^|\\s)([\\w-]*' + word.processedPhrase() + '[\\w-]*)(\\s|$)', word.regexOptions());
+            } else {
+              return new RegExp('\\s?\\b[\\w-]*' + word.processedPhrase() + '[\\w-]*\\b\\s?', word.regexOptions());
+            }
+          } else {
+            // /word/gi
+            return new RegExp(word.processedPhrase(), word.regexOptions());
+          }
+
+        case _constants.default.MatchMethods.Whole:
+          // /\b[\w-]*word[\w-]*\b/gi
+          if (word.unicode) {
+            // Work around for lack of word boundary support for unicode characters
+            // (^|[\s.,'"+!?|-]*)([\S]*куче[\S]*)([\s.,'"+!?|-]*|$)/giu
+            return new RegExp('(^|' + Word._unicodeWordBoundary + '*)([\\S]*' + word.processedPhrase() + '[\\S]*)(' + Word._unicodeWordBoundary + '*|$)', word.regexOptions());
+          } else if (word.hasEdgePunctuation()) {
+            // Begin or end with punctuation (not \w))
+            return new RegExp('(^|\\s)([\\S]*' + word.processedPhrase() + '[\\S]*)(\\s|$)', word.regexOptions());
+          } else {
+            return new RegExp('\\b[\\w-]*' + word.processedPhrase() + '[\\w-]*\\b', word.regexOptions());
+          }
+
+        case _constants.default.MatchMethods.Regex:
+          return new RegExp(word.value, word.regexOptions());
+
+        case _constants.default.MatchMethods.Exact:
+        default:
+          // Match entire word that contains sub-string and surrounding whitespace
+          // /\s?\bword\b\s?/gi
+          if (word._filterMethod === _constants.default.FilterMethods.Remove) {
+            if (word.unicode) {
+              // Work around for lack of word boundary support for unicode characters
+              // /(^|[\s.,'"+!?|-])(word)([\s.,'"+!?|-]+|$)/giu
+              return new RegExp('(^|' + Word._unicodeWordBoundary + ')(' + word.processedPhrase() + ')(' + Word._unicodeWordBoundary + '|$)', word.regexOptions());
+            } else if (word.hasEdgePunctuation()) {
+              // Begin or end with punctuation (not \w))
+              return new RegExp('(^|\\s)(' + word.processedPhrase() + ')(\\s|$)', word.regexOptions());
+            } else {
+              return new RegExp('\\s?\\b' + word.processedPhrase() + '\\b\\s?', word.regexOptions());
+            }
+          } else {
+            if (word.unicode) {
+              // Work around for lack of word boundary support for unicode characters
+              // /(^|[\s.,'"+!?|-]+)(word)([\s.,'"+!?|-]+|$)/giu
+              return new RegExp('(^|' + Word._unicodeWordBoundary + '+)(' + word.processedPhrase() + ')(' + Word._unicodeWordBoundary + '+|$)', word.regexOptions());
+            } else if (word.hasEdgePunctuation()) {
+              // Begin or end with punctuation (not \w))
+              return new RegExp('(^|\\s)(' + word.processedPhrase() + ')(\\s|$)', word.regexOptions());
+            } else {
+              // /\bword\b/gi
+              return new RegExp('\\b' + word.processedPhrase() + '\\b', word.regexOptions());
+            }
+          }
+
+      }
+    } catch (e) {
+      throw new Error('Failed to create RegExp for "' + word.value + '" - ' + e.name + ' ' + e.message);
+    }
+  }
+
+  hasEdgePunctuation() {
+    return Word._edgePunctuationRegExp.test(this.value);
+  }
+
+  processedPhrase() {
+    let word = this;
+    let isEscaped = word.escaped.includes('\\');
+    let val = '';
+    let lastCharIndex = word.escaped.length - 1;
+
+    for (let i = 0; i < word.escaped.length; i++) {
+      // If the current character is a '\', add it and then move to next character
+      if (isEscaped && word.escaped[i] === '\\') {
+        val += word.escaped[i];
+        i++;
+      } // Add the current character
+
+
+      val += word.escaped[i]; // Repeating characters
+      // Word: /w+o+r+d+/g
+
+      if (word.matchRepeated) {
+        val += '+';
+      } // Character separators
+      // Word: /w[-_]*o[-_]*r[-_]*d*/g
+
+
+      if (word.matchSeparators) {
+        if (i != lastCharIndex) {
+          val += Word.separatorsRegExp;
+        }
+      }
+    }
+
+    return val;
+  }
+
+  regexOptions() {
+    let options = 'gi';
+
+    if (this.unicode) {
+      options += 'u';
+    }
+
+    return options;
+  }
+
+}
+
+exports.default = Word;
+
+_defineProperty(Word, "_edgePunctuationRegExp", /(^[,.'"!?%$]|[,.'"!?%$]$)/);
+
+_defineProperty(Word, "_escapeRegExp", /[\/\\^$*+?.()|[\]{}]/g);
+
+_defineProperty(Word, "_unicodeRegExp", /[^\u0000-\u00ff]/);
+
+_defineProperty(Word, "_unicodeWordBoundary", '[\\s.,\'"+!?|-]');
+
+_defineProperty(Word, "nonWordRegExp", new RegExp('^\\s*[^\\w]+\\s*$', 'g'));
+
+_defineProperty(Word, "separatorsRegExp", '[-_ ]*');
+
+_defineProperty(Word, "whitespaceRegExp", /^\s+$/);
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+class WebAudioSites {
+  static combineSites(sites = {}) {
+    return Object.assign({}, WebAudioSites.sites, sites);
+  }
+
+}
+
+exports.default = WebAudioSites;
+
+_defineProperty(WebAudioSites, "sites", {
+  'abc.com': [{
+    className: 'akamai-caption-text',
+    mode: 'element',
+    tagName: 'DIV'
+  }],
+  'acorn.tv': [{
+    iframe: true,
+    mode: 'elementChild',
+    parentSelector: 'div.vjs-text-track-display',
+    simpleUnmute: true,
+    subtitleSelector: ':scope div > div',
+    tagName: 'DIV'
+  }],
+  'www.amazon.com': [{
+    displayHide: 'none',
+    displaySelector: 'div.webPlayerContainer div.f35bt6a',
+    displayShow: '',
+    iframe: false,
+    mode: 'watcher',
+    parentSelector: 'div.webPlayerContainer div p > span',
+    subtitleSelector: 'div.webPlayerContainer div span > span',
+    videoSelector: 'div.webPlayerElement video[src]'
+  }],
+  'www.amc.com': [{
+    className: 'ttr-container',
+    mode: 'element',
+    subtitleSelector: 'span.ttr-cue',
+    tagName: 'DIV'
+  }, {
+    mode: 'cue',
+    videoCueLanguage: 'en',
+    videoSelector: 'video'
+  }],
+  'tv.apple.com': [{
+    displaySelector: 'div.video-container > div > div > div',
+    mode: 'elementChild',
+    parentSelector: 'div.video-container',
+    preserveWhiteSpace: true,
+    rootNode: true,
+    subtitleSelector: 'div > div > div > div > div',
+    tagName: 'DIV'
+  }],
+  'www.att.tv': [{
+    mode: 'cue',
+    videoSelector: 'video#quickplayPlayer'
+  }],
+  'www.attwatchtv.com': [{
+    mode: 'cue',
+    videoSelector: 'video#quickplayPlayer'
+  }],
+  'www.britbox.com': [{
+    className: 'bmpui-ui-subtitle-label',
+    mode: 'element',
+    tagName: 'SPAN'
+  }, {
+    className: 'bmpui-subtitle-region-container',
+    mode: 'element',
+    subtitleSelector: 'div.bmpui-container-wrapper > span.bmpui-ui-subtitle-label',
+    tagName: 'div'
+  }],
+  'gem.cbc.ca': [{
+    className: 'jw-text-track-container',
+    mode: 'element',
+    subtitleSelector: 'div.jw-text-track-cue',
+    tagName: 'DIV'
+  }],
+  'www.cbs.com': [{
+    mode: 'cue',
+    videoCueLanguage: 'en',
+    videoCueRequireShowing: false
+  }],
+  'www.crackle.com': [{
+    ignoreMutations: true,
+    mode: 'elementChild',
+    parentSelector: 'div.clpp-subtitles-container',
+    simpleUnmute: true,
+    tagName: '#text'
+  }],
+  'www.criterionchannel.com': [{
+    iframe: true,
+    mode: 'cue',
+    videoCueHideCues: true,
+    videoCueRequireShowing: false
+  }],
+  'www.crunchyroll.com': [{
+    displaySelector: 'canvas#velocity-canvas',
+    externalSub: true,
+    externalSubVar: 'window.v1config.media.subtitles',
+    iframe: true,
+    mode: 'cue',
+    showSubtitles: 0,
+    videoCueLanguage: 'enUS',
+    videoCueRequireShowing: false
+  }],
+  'www.cwtv.com': [{
+    className: 'ttr-container',
+    mode: 'element',
+    subtitleSelector: 'span.ttr-cue',
+    tagName: 'DIV'
+  }],
+  'www.dishanywhere.com': [{
+    className: 'bmpui-ui-subtitle-label',
+    mode: 'element',
+    tagName: 'SPAN'
+  }, {
+    className: 'bmpui-subtitle-region-container',
+    mode: 'element',
+    subtitleSelector: 'div.bmpui-container-wrapper > span.bmpui-ui-subtitle-label',
+    tagName: 'div'
+  }],
+  'www.disneyplus.com': [{
+    mode: 'cue',
+    videoSelector: 'video.btm-media-client-element'
+  }],
+  'www.fox.com': [{
+    className: 'jw-text-track-container',
+    mode: 'element',
+    subtitleSelector: 'div.jw-text-track-cue',
+    tagName: 'DIV'
+  }],
+  'www.funimation.com': [{
+    iframe: true,
+    mode: 'elementChild',
+    parentSelector: 'div.vjs-text-track-display',
+    simpleUnmute: true,
+    subtitleSelector: ':scope div > div',
+    tagName: 'DIV'
+  }],
+  'play.google.com': [{
+    className: 'lava-timed-text-window',
+    mode: 'element',
+    subtitleSelector: 'span.lava-timed-text-caption',
+    tagName: 'DIV'
+  }],
+  'play.hbomax.com': [{
+    mode: 'elementChild',
+    parentSelectorAll: 'div.class3 > span, div.class28 > span',
+    showSubtitles: 0,
+    tagName: 'SPAN'
+  }],
+  'www.hulu.com': [{
+    className: 'caption-text-box',
+    displaySelector: 'div.caption-text-box',
+    mode: 'element',
+    subtitleSelector: 'p',
+    tagName: 'DIV'
+  }, {
+    displaySelector: 'div.CaptionBox',
+    mode: 'elementChild',
+    parentSelector: 'div.CaptionBox',
+    tagName: 'P'
+  }],
+  'www.nbc.com': [{
+    className: 'ttr-line',
+    mode: 'element',
+    subtitleSelector: 'span.ttr-cue',
+    tagName: 'DIV'
+  }, {
+    mode: 'cue',
+    videoCueLanguage: 'en'
+  }],
+  'www.netflix.com': [{
+    className: 'player-timedtext-text-container',
+    mode: 'element',
+    subtitleSelector: 'span',
+    tagName: 'DIV'
+  }],
+  'www.peacocktv.com': [{
+    mode: 'elementChild',
+    parentSelector: 'div.video-player__subtitles > div',
+    subtitleSelector: 'SPAN > SPAN',
+    tagName: 'div'
+  }],
+  'www.philo.com': [{
+    mode: 'cue'
+  }],
+  'app.plex.tv': [{
+    dataPropPresent: 'dialogueId',
+    mode: 'element',
+    subtitleSelector: 'span > span',
+    tagName: 'DIV'
+  }, {
+    containsSelector: 'div[data-dialogue-id]',
+    mode: 'element',
+    subtitleSelector: 'span > span',
+    tagName: 'DIV'
+  }],
+  'pluto.tv': [{
+    mode: 'cue',
+    videoCueHideCues: true,
+    videoCueRequireShowing: false
+  }],
+  'watch.redeemtv.com': [{
+    convertBreaks: true,
+    displaySelector: 'div.vp-captions',
+    mode: 'elementChild',
+    parentSelector: 'div.vp-captions',
+    tagName: 'SPAN'
+  }],
+  'www.showmax.com': [{
+    ignoreMutations: true,
+    mode: 'elementChild',
+    parentSelector: 'div.contentWrapper > div.subtitles--3EXhT',
+    simpleUnmute: true,
+    tagName: '#text'
+  }],
+  'play.stan.com.au': [{
+    ignoreMutations: true,
+    mode: 'elementChild',
+    parentSelector: 'div.clpp-subtitles-container',
+    simpleUnmute: true,
+    tagName: '#text'
+  }],
+  'www.starz.com': [{
+    mode: 'elementChild',
+    parentSelector: 'starz-captions > div.cue-list',
+    tagName: 'SPAN'
+  }],
+  'www.syfy.com': [{
+    className: 'ttr-line',
+    mode: 'element',
+    subtitleSelector: 'span.ttr-cue',
+    tagName: 'DIV'
+  }],
+  'www.tntdrama.com': [{
+    mode: 'cue',
+    videoCueLanguage: 'en',
+    videoSelector: 'video.top-media-element'
+  }],
+  'tubitv.com': [{
+    mode: 'elementChild',
+    parentSelector: 'div#captionsComponent',
+    tagName: 'SPAN'
+  }],
+  'www.universalkids.com': [{
+    mode: 'element',
+    subtitleSelector: 'div.gwt-HTML',
+    tagName: 'DIV'
+  }],
+  'www.usanetwork.com': [{
+    className: 'ttr-line',
+    mode: 'element',
+    subtitleSelector: 'span.ttr-cue',
+    tagName: 'DIV'
+  }],
+  'www.vudu.com': [{
+    mode: 'element',
+    subtitleSelector: 'span.subtitles',
+    tagName: 'DIV'
+  }],
+  'vrv.co': [{
+    displaySelector: 'div.libassjs-canvas-parent',
+    externalSub: true,
+    externalSubVar: 'window.vilos.content.captions',
+    iframe: true,
+    mode: 'cue',
+    videoCueLanguage: 'en-US',
+    videoCueRequireShowing: false
+  }, {
+    displaySelector: 'div.libassjs-canvas-parent',
+    externalSub: true,
+    externalSubVar: 'window.vilos.content.subtitles',
+    iframe: true,
+    mode: 'cue',
+    videoCueLanguage: 'en-US',
+    videoCueRequireShowing: false
+  }],
+  'm.youtube.com': [{
+    className: 'caption-window',
+    mode: 'element',
+    subtitleSelector: 'span.ytp-caption-segment',
+    tagName: 'DIV'
+  }],
+  'tv.youtube.com': [{
+    className: 'caption-window',
+    mode: 'element',
+    subtitleSelector: 'span.ytp-caption-segment',
+    tagName: 'DIV'
+  }],
+  'www.youtube.com': [{
+    className: 'caption-window',
+    mode: 'element',
+    subtitleSelector: 'span.ytp-caption-segment',
+    tagName: 'DIV'
+  }]
+});
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _word = _interopRequireDefault(__webpack_require__(5));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+class Wordlist {
+  constructor(cfg, wordlistId) {
+    _defineProperty(this, "all", void 0);
+
+    _defineProperty(this, "list", void 0);
+
+    _defineProperty(this, "regExps", void 0);
+
+    let self = this;
+    this.all = [];
+    this.list = [];
+    this.regExps = []; // Sort the words array by longest (most-specific) first
+
+    let sorted = Object.keys(cfg.words).sort((a, b) => {
+      return b.length - a.length;
+    }); // Process list of words
+
+    sorted.forEach(wordStr => {
+      // wordlistId = 0 includes all words
+      if (wordlistId === 0 || !Array.isArray(cfg.words[wordStr].lists) || cfg.words[wordStr].lists.includes(wordlistId)) {
+        let word;
+
+        try {
+          word = new _word.default(wordStr, cfg.words[wordStr], cfg);
+          self.list.push(wordStr);
+          self.all.push(word);
+          self.regExps.push(word.regExp);
+        } catch (e) {
+          // eslint-disable-next-line no-console
+          console.error(`APF: Failed to add word: '${wordStr}'`);
+        }
+      }
+    });
+  }
+
+  find(value) {
+    if (typeof value === 'string') {
+      return this.all[this.list.indexOf(value)];
+    } else if (typeof value === 'number') {
+      return this.all[value];
+    }
+  }
+
+}
+
+exports.default = Wordlist;
+
+/***/ }),
+/* 8 */,
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _constants = _interopRequireDefault(__webpack_require__(0));
+
+var _word = _interopRequireDefault(__webpack_require__(5));
+
+var _wordlist = _interopRequireDefault(__webpack_require__(7));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+class Filter {
+  constructor() {
+    _defineProperty(this, "cfg", void 0);
+
+    _defineProperty(this, "counter", void 0);
+
+    _defineProperty(this, "iWhitelist", void 0);
+
+    _defineProperty(this, "whitelist", void 0);
+
+    _defineProperty(this, "wordlistId", void 0);
+
+    _defineProperty(this, "wordlists", void 0);
+
+    this.counter = 0;
+    this.iWhitelist = [];
+    this.whitelist = [];
+    this.wordlists = {};
+  }
+
+  buildWordlist(wordlistId, rebuild = false) {
+    if (wordlistId === false) {
+      wordlistId = this.wordlistId;
+    } // Generate a new wordlist if required
+
+
+    if (rebuild || !this.wordlists[wordlistId]) {
+      this.wordlists[wordlistId] = new _wordlist.default(this.cfg, wordlistId);
+    }
+
+    return wordlistId;
+  }
+
+  checkWhitelist(match, string, matchStartIndex, word) {
+    let self = this;
+    let whitelistLength = self.whitelist.length;
+    let iWhitelistLength = self.iWhitelist.length;
+
+    if (whitelistLength || iWhitelistLength) {
+      // Check for exact/whole match (match case)
+      if (whitelistLength && self.whitelist.includes(match)) {
+        return true;
+      } // Check for exact/whole match (case insensitive)
+
+
+      if (iWhitelistLength && self.iWhitelist.includes(match.toLowerCase())) {
+        return true;
+      } // Check for partial match (match may not contain the full whitelisted word)
+
+
+      if (word.matchMethod === _constants.default.MatchMethods.Partial) {
+        let wordOptions = {
+          matchMethod: _constants.default.MatchMethods.Whole,
+          repeat: false,
+          separators: false,
+          sub: ''
+        };
+        let wholeWordRegExp = new _word.default(match, wordOptions, this.cfg).regExp;
+        let result;
+
+        while ((result = wholeWordRegExp.exec(string)) !== null) {
+          let resultMatch = result.length == 4 ? result[2] : result[0];
+          let resultIndex = result.length == 4 ? result.index + result[1].length : result.index; // Make sure this is the match we want to check
+
+          if (resultIndex <= matchStartIndex && resultIndex + resultMatch.length >= matchStartIndex + match.length) {
+            if (whitelistLength && self.whitelist.includes(resultMatch)) {
+              return true;
+            }
+
+            if (iWhitelistLength && self.iWhitelist.includes(resultMatch.toLowerCase())) {
+              return true;
+            }
+          }
+        }
+      }
+    }
+
+    return false;
+  }
+
+  foundMatch(word) {
+    this.counter++;
+  }
+
+  init(wordlistId = false) {
+    this.iWhitelist = this.cfg.iWordWhitelist;
+    this.whitelist = this.cfg.wordWhitelist;
+
+    if (this.wordlistId === undefined) {
+      this.wordlistId = this.cfg.wordlistId == null ? 0 : this.cfg.wordlistId;
+    }
+
+    this.buildWordlist(wordlistId);
+  }
+
+  matchData(wordlist, index, match, args) {
+    let word = wordlist.find(index);
+    let string = args.pop();
+    let matchStartIndex = args.pop();
+    let captureGroups = args; // (boundary)(match)(boundary): Used internally for several types of matches:
+    // - Remove Filter
+    // - Unicode word boundaries (workaround)
+    // - Edge punctuation
+
+    let internalCaptureGroups = captureGroups.length > 0 && word.matchMethod !== _constants.default.MatchMethods.Regex;
+
+    if (internalCaptureGroups) {
+      match = captureGroups[1];
+    }
+
+    return {
+      word: word,
+      string: string,
+      match: match,
+      matchStartIndex: matchStartIndex,
+      captureGroups: captureGroups,
+      internalCaptureGroups: internalCaptureGroups
+    };
+  }
+
+  rebuildWordlists() {
+    let self = this;
+    Object.keys(this.wordlists).forEach(function (key) {
+      self.buildWordlist(parseInt(key), true);
+    });
+  }
+
+  replaceText(str, wordlistId = false, stats = true) {
+    let self = this;
+    wordlistId = self.buildWordlist(wordlistId);
+    let wordlist = self.wordlists[wordlistId];
+
+    switch (self.cfg.filterMethod) {
+      case _constants.default.FilterMethods.Censor:
+        wordlist.regExps.forEach((regExp, index) => {
+          str = str.replace(regExp, function (originalMatch, ...args) {
+            let {
+              word,
+              string,
+              match,
+              matchStartIndex,
+              captureGroups,
+              internalCaptureGroups
+            } = self.matchData(wordlist, index, originalMatch, args);
+
+            if (self.checkWhitelist(match, string, matchStartIndex, word)) {
+              return match;
+            } // Check for whitelisted match
+
+
+            if (stats) {
+              self.foundMatch(word);
+            } // Filter
+
+
+            let censoredString = '';
+            let censorLength = self.cfg.censorFixedLength > 0 ? self.cfg.censorFixedLength : match.length;
+
+            if (self.cfg.preserveFirst && self.cfg.preserveLast) {
+              censoredString = match[0] + self.cfg.censorCharacter.repeat(censorLength - 2) + match.slice(-1);
+            } else if (self.cfg.preserveFirst) {
+              censoredString = match[0] + self.cfg.censorCharacter.repeat(censorLength - 1);
+            } else if (self.cfg.preserveLast) {
+              censoredString = self.cfg.censorCharacter.repeat(censorLength - 1) + match.slice(-1);
+            } else {
+              censoredString = self.cfg.censorCharacter.repeat(censorLength);
+            }
+
+            if (internalCaptureGroups) {
+              censoredString = captureGroups[0] + censoredString + captureGroups[2];
+            }
+
+            return censoredString;
+          });
+        });
+        break;
+
+      case _constants.default.FilterMethods.Substitute:
+        wordlist.regExps.forEach((regExp, index) => {
+          str = str.replace(regExp, function (originalMatch, ...args) {
+            let {
+              word,
+              string,
+              match,
+              matchStartIndex,
+              captureGroups,
+              internalCaptureGroups
+            } = self.matchData(wordlist, index, originalMatch, args);
+
+            if (self.checkWhitelist(match, string, matchStartIndex, word)) {
+              return match;
+            } // Check for whitelisted match
+
+
+            if (stats) {
+              self.foundMatch(word);
+            } // Filter
+
+
+            let sub = word.sub || self.cfg.defaultSubstitution; // Make substitution match case of original match
+
+            if (self.cfg.preserveCase) {
+              if (_word.default.allUpperCase(match)) {
+                sub = sub.toUpperCase();
+              } else if (_word.default.capitalized(match)) {
+                sub = _word.default.capitalize(sub);
+              }
+            }
+
+            if (self.cfg.substitutionMark) {
+              sub = '[' + sub + ']';
+            }
+
+            if (internalCaptureGroups) {
+              sub = captureGroups[0] + sub + captureGroups[2];
+            }
+
+            return sub;
+          });
+        });
+        break;
+
+      case _constants.default.FilterMethods.Remove:
+        wordlist.regExps.forEach((regExp, index) => {
+          str = str.replace(regExp, function (originalMatch, ...args) {
+            let {
+              word,
+              string,
+              match,
+              matchStartIndex,
+              captureGroups,
+              internalCaptureGroups
+            } = self.matchData(wordlist, index, originalMatch, args);
+
+            if (self.checkWhitelist(match.trim(), string, matchStartIndex, word)) {
+              return match;
+            } // Check for whitelisted match
+
+
+            if (stats) {
+              self.foundMatch(word);
+            } // Filter
+
+
+            if (internalCaptureGroups) {
+              if (_word.default.whitespaceRegExp.test(captureGroups[0]) && _word.default.whitespaceRegExp.test(captureGroups[2])) {
+                // If both surrounds are whitespace (only need 1)
+                return captureGroups[0];
+              } else if (_word.default.nonWordRegExp.test(captureGroups[0]) || _word.default.nonWordRegExp.test(captureGroups[2])) {
+                // If there is more than just whitesapce (ex. ',')
+                return (captureGroups[0] + captureGroups[2]).trim();
+              } else {
+                return '';
+              }
+            } else {
+              // Don't remove both leading and trailing whitespace
+              if (_word.default.whitespaceRegExp.test(match[0]) && _word.default.whitespaceRegExp.test(match[match.length - 1])) {
+                return match[0];
+              } else {
+                return '';
+              }
+            }
+          });
+        });
+        break;
+    }
+
+    return str;
+  }
+
+  replaceTextResult(str, wordlistId = false, stats = true) {
+    let result = {
+      original: str,
+      filtered: this.replaceText(str, wordlistId, stats),
+      modified: false
+    };
+    result.modified = result.filtered != str;
+    return result;
+  }
+
+}
+
+exports.default = Filter;
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+class Page {
+  constructor() {
+    _defineProperty(this, "xpathDocText", void 0);
+
+    _defineProperty(this, "xpathNodeText", void 0);
+  }
+
+  // Returns true if a node should *not* be altered in any way
+  static isForbiddenNode(node) {
+    if (node.isContentEditable) {
+      return true;
+    } // Check if parentNode is a forbidden tag
+
+
+    if (node.parentNode && (node.parentNode.isContentEditable || Page.forbiddenTags.includes(node.parentNode.nodeName))) {
+      return true;
+    } // Check if node is a forbidden tag
+
+
+    return Page.forbiddenTags.includes(node.nodeName);
+  }
+
+}
+
+exports.default = Page;
+
+_defineProperty(Page, "disabledProtocols", new RegExp('(^chrome:|^about:|^[a-zA-Z]+-extension:)', 'i'));
+
+_defineProperty(Page, "forbiddenNodeRegExp", new RegExp('^\s*(<[a-z].+?\/?>|{.+?:.+?;.*}|https?:\/\/[^\s]+$)'));
+
+_defineProperty(Page, "forbiddenTags", ['SCRIPT', 'STYLE', 'INPUT', 'TEXTAREA', 'IFRAME', 'LINK']);
+
+/***/ }),
+/* 11 */,
+/* 12 */,
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _constants = _interopRequireDefault(__webpack_require__(0));
+
+var _domain = _interopRequireDefault(__webpack_require__(4));
+
+var _filter = _interopRequireDefault(__webpack_require__(9));
+
+var _page = _interopRequireDefault(__webpack_require__(10));
+
+var _webAudio = _interopRequireDefault(__webpack_require__(14));
+
+var _webConfig = _interopRequireDefault(__webpack_require__(2));
+
+var _wordlist = _interopRequireDefault(__webpack_require__(7));
+
+__webpack_require__(15);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+class WebFilter extends _filter.default {
+  constructor() {
+    super();
+
+    _defineProperty(this, "audio", void 0);
+
+    _defineProperty(this, "audioOnly", void 0);
+
+    _defineProperty(this, "audioWordlistId", void 0);
+
+    _defineProperty(this, "cfg", void 0);
+
+    _defineProperty(this, "domain", void 0);
+
+    _defineProperty(this, "hostname", void 0);
+
+    _defineProperty(this, "iframe", void 0);
+
+    _defineProperty(this, "location", void 0);
+
+    _defineProperty(this, "mutePage", void 0);
+
+    _defineProperty(this, "observer", void 0);
+
+    _defineProperty(this, "processMutationTarget", void 0);
+
+    _defineProperty(this, "processNode", void 0);
+
+    _defineProperty(this, "shadowObserver", void 0);
+
+    _defineProperty(this, "summary", void 0);
+
+    this.audioWordlistId = 0;
+    this.mutePage = false;
+    this.processMutationTarget = false;
+    this.summary = {};
+  }
+
+  advancedReplaceText(node, wordlistId, stats = true) {
+    if (node.parentNode || node === document) {
+      filter.wordlists[wordlistId].regExps.forEach(regExp => {
+        // @ts-ignore - External library function
+        findAndReplaceDOMText(node, {
+          preset: 'prose',
+          find: regExp,
+          replace: function (portion, match) {
+            // console.log('[APF] Advanced node match:', node.textContent); // Debug: Filter - Advanced match
+            if (portion.index === 0) {
+              // Replace the whole match on the first portion and skip the rest
+              return filter.replaceText(match[0], wordlistId, stats);
+            } else {
+              return '';
+            }
+          }
+        });
+      });
+    } else {
+      // ?: Might want to add support for processNode()
+      this.cleanText(node, wordlistId, stats);
+    }
+  }
+
+  checkMutationForProfanity(mutation) {
+    // console.count('[APF] filter.checkMutationForProfanity() count'); // Benchmark: Filter
+    // console.log('[APF] Mutation observed:', mutation); // Debug: Filter - Mutation
+    mutation.addedNodes.forEach(node => {
+      if (!_page.default.isForbiddenNode(node)) {
+        // console.log('[APF] Added node(s):', node); // Debug: Filter - Mutation addedNodes
+        if (filter.mutePage) {
+          filter.cleanAudio(node);
+        } else if (!filter.audioOnly) {
+          filter.processNode(node, filter.wordlistId);
+        }
+      } // else { console.log('[APF] Forbidden node:', node); } // Debug: Filter - Mutation addedNodes
+
+    }); // Check removed nodes to see if we should unmute
+
+    if (filter.mutePage && filter.audio.muted) {
+      mutation.removedNodes.forEach(node => {
+        let supported = filter.audio.supportedNode(node);
+        let rule = supported !== false ? filter.audio.rules[supported] : filter.audio.rules[0]; // Use the matched rule, or the first rule
+
+        if (supported !== false || node == filter.audio.lastFilteredNode || node.contains(filter.audio.lastFilteredNode) || rule.simpleUnmute && filter.audio.lastFilteredText && filter.audio.lastFilteredText.includes(node.textContent)) {
+          filter.audio.unmute(rule);
+        }
+      });
+    }
+
+    if (mutation.target) {
+      if (mutation.target.nodeName === '#text') {
+        filter.checkMutationTargetTextForProfanity(mutation);
+      } else if (filter.processMutationTarget) {
+        filter.processNode(mutation.target, filter.wordlistId);
+      }
+    }
+  }
+
+  checkMutationTargetTextForProfanity(mutation) {
+    // console.count('checkMutationTargetTextForProfanity'); // Benchmark: Filter
+    // console.log('[APF] Process mutation.target:', mutation.target, mutation.target.data); // Debug: Filter - Mutation text
+    if (!_page.default.isForbiddenNode(mutation.target)) {
+      if (filter.mutePage) {
+        let supported = filter.audio.supportedNode(mutation.target);
+        let rule = supported !== false ? filter.audio.rules[supported] : filter.audio.rules[0]; // Use the matched rule, or the first rule
+
+        if (supported !== false && rule.simpleUnmute) {
+          // Supported node. Check if a previously filtered node is being removed
+          if (filter.audio.muted && mutation.oldValue && filter.audio.lastFilteredText && filter.audio.lastFilteredText.includes(mutation.oldValue)) {
+            filter.audio.unmute(rule);
+          }
+
+          filter.audio.clean(mutation.target, supported);
+        } else if (rule.simpleUnmute && filter.audio.muted && !mutation.target.parentElement) {
+          // Check for removing a filtered subtitle (no parent)
+          if (filter.audio.lastFilteredText && filter.audio.lastFilteredText.includes(mutation.target.textContent)) {
+            filter.audio.unmute(rule);
+          }
+        } else if (!filter.audioOnly) {
+          // Filter regular text
+          let result = this.replaceTextResult(mutation.target.data, this.wordlistId);
+
+          if (result.modified) {
+            mutation.target.data = result.filtered;
+          }
+        }
+      } else if (!filter.audioOnly) {
+        // Filter regular text
+        let result = this.replaceTextResult(mutation.target.data, this.wordlistId);
+
+        if (result.modified) {
+          mutation.target.data = result.filtered;
+        }
+      }
+    } // else { console.log('[APF] Forbidden mutation.target node:', mutation.target); } // Debug: Filter - Mutation text
+
+  }
+
+  cleanAudio(node) {
+    // YouTube Auto subs
+    if (filter.audio.youTube && filter.audio.youTubeAutoSubsPresent()) {
+      if (filter.audio.youTubeAutoSubsSupportedNode(node)) {
+        if (filter.audio.youTubeAutoSubsCurrentRow(node)) {
+          // console.log('[APF] YouTube subtitle node:', node); // Debug: Audio
+          filter.audio.cleanYouTubeAutoSubs(node);
+        } else if (!filter.audioOnly) {
+          filter.processNode(node, filter.wordlistId); // Clean the rest of the page
+        }
+      } else if (!filter.audioOnly && !filter.audio.youTubeAutoSubsNodeIsSubtitleText(node)) {
+        filter.processNode(node, filter.wordlistId); // Clean the rest of the page
+      }
+    } else {
+      // Other audio muting
+      let supported = filter.audio.supportedNode(node);
+
+      if (supported !== false) {
+        // console.log('[APF] Audio subtitle node:', node); // Debug: Audio
+        filter.audio.clean(node, supported);
+      } else if (!filter.audioOnly) {
+        filter.processNode(node, filter.wordlistId); // Clean the rest of the page
+      }
+    }
+  }
+
+  cleanChildNode(node, wordlistId, stats = true) {
+    if (node.nodeName) {
+      if (node.textContent && node.textContent.trim() != '') {
+        let result = this.replaceTextResult(node.textContent, wordlistId, stats);
+
+        if (result.modified) {
+          // console.log('[APF] Normal node changed:', result.original, result.filtered); // Debug: Filter - Mutation node filtered
+          node.textContent = result.filtered;
+        }
+      } else if (node.nodeName == 'IMG') {
+        if (node.alt != '') {
+          node.alt = this.replaceText(node.alt, wordlistId, stats);
+        }
+
+        if (node.title != '') {
+          node.title = this.replaceText(node.title, wordlistId, stats);
+        }
+      } else if (node.shadowRoot) {
+        this.filterShadowRoot(node.shadowRoot, wordlistId, stats);
+      }
+    } // else { console.log('[APF] node without nodeName:', node); } // Debug: Filter
+
+  }
+
+  cleanNode(node, wordlistId, stats = true) {
+    if (_page.default.isForbiddenNode(node)) {
+      return false;
+    }
+
+    if (node.shadowRoot) {
+      this.filterShadowRoot(node.shadowRoot, wordlistId, stats);
+    }
+
+    if (node.childNodes.length > 0) {
+      for (let i = 0; i < node.childNodes.length; i++) {
+        this.cleanNode(node.childNodes[i], wordlistId, stats);
+      }
+    } else {
+      this.cleanChildNode(node, this.wordlistId, stats);
+    }
+  }
+
+  async cleanPage() {
+    this.cfg = await _webConfig.default.build();
+    this.domain = _domain.default.byHostname(this.hostname, this.cfg.domains); // console.log('[APF] Config loaded', this.cfg); // Debug: General
+
+    let backgroundData = await this.getBackgroundData(); // Use domain-specific settings
+
+    let message = {
+      disabled: backgroundData.disabledTab || this.cfg.enabledDomainsOnly && !this.domain.enabled || this.domain.disabled
+    };
+
+    if (message.disabled) {
+      // console.log(`[APF] Disabled page: ${this.hostname} - exiting`); // Debug: General
+      chrome.runtime.sendMessage(message);
+      return false;
+    }
+
+    if (this.domain.wordlistId !== undefined) {
+      this.wordlistId = this.domain.wordlistId;
+    }
+
+    if (this.domain.audioWordlistId !== undefined) {
+      this.audioWordlistId = this.domain.audioWordlistId;
+    } // Detect if we should mute audio for the current page
+
+
+    if (this.cfg.muteAudio) {
+      this.audio = new _webAudio.default(this);
+      this.mutePage = this.audio.supportedPage;
+
+      if (this.mutePage) {
+        // console.log(`[APF] Enabling audio muting on ${this.hostname}`); // Debug: Audio
+        // Prebuild audio wordlist
+        if (this.cfg.wordlistsEnabled && this.wordlistId != this.audio.wordlistId) {
+          this.wordlists[this.audio.wordlistId] = new _wordlist.default(this.cfg, this.audio.wordlistId);
+        }
+      }
+    } // Disable if muteAudioOnly mode is active and this is not a suported page
+
+
+    if (this.cfg.muteAudioOnly) {
+      if (this.mutePage) {
+        this.audioOnly = true;
+      } else {
+        message.disabled = true; // console.log('[APF] Non audio page in audio only mode - exiting'); // Debug: Audio
+
+        chrome.runtime.sendMessage(message);
+        return false;
+      }
+    }
+
+    this.sendInitState(message);
+    this.popupListener(); // Remove profanity from the main document and watch for new nodes
+
+    this.init(); // console.log('[APF] Filter initialized.', this); // Debug: General
+
+    if (!this.audioOnly) {
+      this.processNode(document, this.wordlistId);
+    }
+
+    this.updateCounterBadge();
+    this.startObserving(document);
+  }
+
+  cleanText(node, wordlistId, stats = true) {
+    if (_page.default.isForbiddenNode(node)) {
+      return false;
+    }
+
+    if (node.shadowRoot) {
+      this.filterShadowRoot(node.shadowRoot, wordlistId, stats);
+    }
+
+    if (node.childElementCount > 0) {
+      let treeWalker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT);
+
+      while (treeWalker.nextNode()) {
+        if (treeWalker.currentNode.childNodes.length > 0) {
+          treeWalker.currentNode.childNodes.forEach(childNode => {
+            this.cleanText(childNode, wordlistId, stats);
+          });
+        } else {
+          if (!_page.default.isForbiddenNode(treeWalker.currentNode)) {
+            this.cleanChildNode(treeWalker.currentNode, wordlistId, stats);
+          }
+        }
+      }
+    } else {
+      this.cleanChildNode(node, wordlistId, stats);
+    }
+  }
+
+  filterShadowRoot(shadowRoot, wordlistId, stats = true) {
+    this.shadowObserver.observe(shadowRoot, ObserverConfig);
+    this.processNode(shadowRoot, wordlistId, stats);
+  }
+
+  foundMatch(word) {
+    super.foundMatch(word);
+
+    if (this.cfg.showSummary) {
+      if (this.summary[word.value]) {
+        this.summary[word.value].count += 1;
+      } else {
+        let result;
+
+        if (word.matchMethod === _constants.default.MatchMethods.Regex) {
+          result = word.sub || this.cfg.defaultSubstitution;
+        } else {
+          result = filter.replaceText(word.value, 0, false); // We can use 0 (All) here because we are just filtering a word
+        }
+
+        this.summary[word.value] = {
+          filtered: result,
+          count: 1
+        };
+      }
+    }
+  }
+
+  getBackgroundData() {
+    return new Promise(function (resolve, reject) {
+      chrome.runtime.sendMessage({
+        backgroundData: true
+      }, function (response) {
+        if (!response) {
+          response = {
+            disabledTab: false
+          };
+        }
+
+        resolve(response);
+      });
+    });
+  }
+
+  init(wordlistId = false) {
+    super.init(wordlistId);
+
+    if (this.domain.advanced) {
+      this.processNode = this.advancedReplaceText;
+    } else if (this.domain.deep) {
+      this.processMutationTarget = true;
+      this.processNode = this.cleanNode;
+    } else {
+      this.processNode = this.cleanText;
+    }
+  } // Listen for data requests from Popup
+
+
+  popupListener() {
+    /* istanbul ignore next */
+    chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+      if (filter.cfg.showSummary && request.popup && (filter.counter > 0 || filter.mutePage)) {
+        chrome.runtime.sendMessage({
+          mutePage: filter.mutePage,
+          summary: filter.summary
+        });
+      }
+    });
+  }
+
+  processMutations(mutations) {
+    mutations.forEach(function (mutation) {
+      filter.checkMutationForProfanity(mutation);
+    });
+    filter.updateCounterBadge();
+  }
+
+  sendInitState(message) {
+    // Reset muted state on page load if we muted the tab audio
+    if (this.cfg.muteAudio && this.cfg.muteMethod == _constants.default.MuteMethods.Tab) {
+      message.clearMute = true;
+    } // Send page state to color icon badge
+
+
+    if (!this.iframe) {
+      message.setBadgeColor = true;
+    }
+
+    message.advanced = this.domain.advanced;
+    message.mutePage = this.mutePage;
+
+    if (this.mutePage && this.cfg.showCounter) {
+      message.counter = this.counter;
+    } // Always show counter when muting audio
+
+
+    chrome.runtime.sendMessage(message);
+  }
+
+  startObserving(target = document, observer = filter.observer) {
+    observer.observe(target, ObserverConfig);
+  }
+
+  stopObserving(observer = filter.observer) {
+    let mutations = observer.takeRecords();
+    observer.disconnect();
+
+    if (mutations) {
+      this.processMutations(mutations);
+    }
+  }
+
+  updateCounterBadge() {
+    /* istanbul ignore next */
+    // console.count('updateCounterBadge'); // Benchmark: Filter
+    if (this.counter > 0) {
+      try {
+        if (this.cfg.showCounter) chrome.runtime.sendMessage({
+          counter: this.counter
+        });
+        if (this.cfg.showSummary) chrome.runtime.sendMessage({
+          summary: this.summary
+        });
+      } catch (e) {// console.log('Failed to sendMessage', e); // Error - Extension context invalidated.
+      }
+    }
+  }
+
+}
+
+exports.default = WebFilter;
+let filter = new WebFilter();
+const ObserverConfig = {
+  characterData: true,
+  characterDataOldValue: true,
+  childList: true,
+  subtree: true
+};
+
+if (typeof window !== 'undefined' && ['[object Window]', '[object ContentScriptGlobalScope]'].includes({}.toString.call(window))) {
+  filter.observer = new MutationObserver(filter.processMutations);
+  filter.shadowObserver = new MutationObserver(filter.processMutations); // The hostname should resolve to the browser window's URI (or the parent of an IFRAME) for disabled/advanced page checks
+
+  if (window != window.top) {
+    filter.iframe = document.location;
+
+    try {
+      // same domain
+      filter.hostname = window.parent.location.hostname;
+    } catch (e) {
+      // different domain
+      if (document.referrer) {
+        filter.hostname = new URL(document.referrer).hostname;
+      } else {
+        filter.hostname = document.location.hostname;
+      }
+    }
+  } else {
+    filter.hostname = document.location.hostname;
+  }
+  /* istanbul ignore next */
+
+
+  filter.cleanPage();
+}
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _constants = _interopRequireDefault(__webpack_require__(0));
+
+var _webAudioSites = _interopRequireDefault(__webpack_require__(6));
+
+var _helper = __webpack_require__(1);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+class WebAudio {
+  constructor(filter) {
+    _defineProperty(this, "cueRuleIds", void 0);
+
+    _defineProperty(this, "enabledRuleIds", void 0);
+
+    _defineProperty(this, "fetching", void 0);
+
+    _defineProperty(this, "filter", void 0);
+
+    _defineProperty(this, "lastFilteredNode", void 0);
+
+    _defineProperty(this, "lastFilteredText", void 0);
+
+    _defineProperty(this, "lastProcessedText", void 0);
+
+    _defineProperty(this, "muted", void 0);
+
+    _defineProperty(this, "rules", void 0);
+
+    _defineProperty(this, "sites", void 0);
+
+    _defineProperty(this, "supportedPage", void 0);
+
+    _defineProperty(this, "unmuteTimeout", void 0);
+
+    _defineProperty(this, "volume", void 0);
+
+    _defineProperty(this, "watcherRuleIds", void 0);
+
+    _defineProperty(this, "wordlistId", void 0);
+
+    _defineProperty(this, "youTube", void 0);
+
+    _defineProperty(this, "youTubeAutoSubsMax", void 0);
+
+    _defineProperty(this, "youTubeAutoSubsMin", void 0);
+
+    _defineProperty(this, "youTubeAutoSubsTimeout", void 0);
+
+    _defineProperty(this, "youTubeAutoSubsUnmuteDelay", void 0);
+
+    this.cueRuleIds = [];
+    this.enabledRuleIds = [];
+    this.watcherRuleIds = [];
+    this.filter = filter;
+    this.lastFilteredNode = null;
+    this.lastFilteredText = '';
+    this.lastProcessedText = '';
+    this.muted = false;
+
+    if (!filter.cfg.customAudioSites || typeof filter.cfg.customAudioSites !== 'object') {
+      filter.cfg.customAudioSites = {};
+    }
+
+    this.sites = _webAudioSites.default.combineSites(filter.cfg.customAudioSites);
+    this.volume = 1;
+    this.wordlistId = filter.audioWordlistId;
+    this.youTubeAutoSubsMax = filter.cfg.youTubeAutoSubsMax * 1000;
+    this.youTubeAutoSubsMin = filter.cfg.youTubeAutoSubsMin;
+    this.youTubeAutoSubsUnmuteDelay = 0; // Setup rules for current site
+
+    this.rules = this.sites[filter.hostname];
+
+    if (this.rules) {
+      if (!Array.isArray(this.rules)) {
+        this.rules = [this.rules];
+      }
+
+      this.initRules();
+
+      if (this.enabledRuleIds.length > 0) {
+        this.supportedPage = true;
+
+        if (['m.youtube.com', 'tv.youtube.com', 'www.youtube.com'].includes(filter.hostname)) {
+          this.youTube = true; // Issue 251: YouTube is now filtering words out of auto-generated captions/subtitles
+
+          let youTubeAutoCensor = '[ __ ]';
+          let lists = this.wordlistId == 0 ? [] : [this.wordlistId];
+          let youTubeAutoCensorOptions = {
+            lists: lists,
+            matchMethod: _constants.default.MatchMethods.Partial,
+            repeat: false,
+            separators: false,
+            sub: ''
+          };
+          this.filter.cfg.addWord(youTubeAutoCensor, youTubeAutoCensorOptions);
+        }
+
+        if (this.watcherRuleIds.length > 0) {
+          this.watcherRuleIds.forEach(ruleId => {
+            setInterval(this.watcher, this.rules[ruleId].checkInterval, this, ruleId);
+          });
+        }
+
+        if (this.cueRuleIds.length > 0) {
+          setInterval(this.watchForVideo, 250, this);
+        }
+      }
+    }
+  }
+
+  clean(subtitleContainer, ruleIndex = 0) {
+    let rule = this.rules[ruleIndex];
+
+    if (rule.mode === 'watcher') {
+      return;
+    } // If this is for a watcher rule, leave the text alone
+
+
+    let filtered = false;
+
+    if (subtitleContainer.nodeName && subtitleContainer.nodeName === '#text' && subtitleContainer.parentElement) {
+      subtitleContainer = subtitleContainer.parentElement;
+    }
+
+    let subtitles = rule.subtitleSelector && subtitleContainer.querySelectorAll ? subtitleContainer.querySelectorAll(rule.subtitleSelector) : [subtitleContainer];
+
+    if (subtitles.length === 0) {
+      return;
+    } // Process subtitles
+
+
+    subtitles.forEach(subtitle => {
+      // innerText handles line feeds/spacing better, but is not available to #text nodes
+      let textMethod = subtitle.nodeName === '#text' ? 'textContent' : 'innerText';
+
+      if (rule.convertBreaks === true && subtitle.nodeName !== '#text' && !WebAudio.brTagRegExp.test(subtitle[textMethod]) && WebAudio.brTagRegExp.test(subtitle.innerHTML)) {
+        if (subtitle.style.whiteSpace !== 'pre') {
+          subtitle.style.whiteSpace = 'pre';
+        }
+
+        subtitle.textContent = subtitle.innerHTML.replace(WebAudio.brTagRegExp, '\n');
+      }
+
+      let result = this.replaceTextResult(subtitle[textMethod]);
+
+      if (result.modified) {
+        filtered = true;
+        this.mute(rule); // Mute the audio if we haven't already
+
+        if (rule.filterSubtitles) {
+          if (rule.preserveWhiteSpace && subtitle.style.whiteSpace !== 'pre') {
+            subtitle.style.whiteSpace = 'pre';
+          }
+
+          if (rule.ignoreMutations) {
+            this.filter.stopObserving();
+          }
+
+          subtitle[textMethod] = result.filtered;
+
+          if (rule.ignoreMutations) {
+            this.filter.startObserving();
+          }
+        }
+
+        this.lastFilteredNode = subtitle;
+        this.lastFilteredText = subtitle[textMethod];
+      }
+    });
+
+    switch (rule.showSubtitles) {
+      case _constants.default.ShowSubtitles.Filtered:
+        if (filtered) {
+          this.showSubtitles(rule, subtitles);
+        } else {
+          this.hideSubtitles(rule, subtitles);
+        }
+
+        break;
+
+      case _constants.default.ShowSubtitles.Unfiltered:
+        if (filtered) {
+          this.hideSubtitles(rule, subtitles);
+        } else {
+          this.showSubtitles(rule, subtitles);
+        }
+
+        break;
+
+      case _constants.default.ShowSubtitles.None:
+        this.hideSubtitles(rule, subtitles);
+        break;
+    }
+  }
+
+  cleanYouTubeAutoSubs(node) {
+    // Found a new word, clear the max timeout
+    if (this.youTubeAutoSubsTimeout != null) {
+      clearTimeout(this.youTubeAutoSubsTimeout);
+      this.youTubeAutoSubsTimeout = null;
+    }
+
+    let result = this.replaceTextResult(node.textContent);
+
+    if (result.modified) {
+      node.textContent = result.filtered;
+      this.mute();
+      this.youTubeAutoSubsUnmuteDelay = null;
+      this.filter.updateCounterBadge(); // Set a timer to unmute if a max time was specified
+
+      if (this.youTubeAutoSubsMax) {
+        this.youTubeAutoSubsTimeout = window.setTimeout(this.youTubeAutoSubsMuteTimeout, this.youTubeAutoSubsMax, this);
+      }
+    } else {
+      if (this.muted) {
+        if (this.youTubeAutoSubsMin > 0) {
+          let currentTime = document.getElementsByTagName(WebAudio.DefaultVideoSelector)[0].currentTime;
+
+          if (this.youTubeAutoSubsUnmuteDelay == null) {
+            // Start tracking youTubeAutoSubsUnmuteDelay when next unfiltered word is found
+            this.youTubeAutoSubsUnmuteDelay = currentTime;
+          } else {
+            if (currentTime < this.youTubeAutoSubsUnmuteDelay) {
+              this.youTubeAutoSubsUnmuteDelay = 0;
+            } // Reset youTubeAutoSubsUnmuteDelay if video reversed
+
+
+            if (currentTime > this.youTubeAutoSubsUnmuteDelay + this.youTubeAutoSubsMin) {
+              // Unmute if its been long enough
+              this.unmute();
+            }
+          }
+        } else {
+          // Unmute immediately if youTubeAutoSubsMin = 0
+          this.unmute();
+        }
+      }
+    } // Hide YouTube auto text unless show all subtitles is set
+
+
+    if (this.filter.cfg.showSubtitles !== _constants.default.ShowSubtitles.All) {
+      let container = document.querySelector('div.ytp-caption-window-rollup span.captions-text');
+
+      if (container.style.display == 'block') {
+        container.style.display = 'none';
+      }
+    }
+  }
+
+  clearUnmuteTimeout(rule) {
+    if (rule.unmuteDelay && this.unmuteTimeout != null) {
+      clearTimeout(this.unmuteTimeout);
+      this.unmuteTimeout = null;
+    }
+  }
+
+  delayedUnmute(instance, rule) {
+    let delayed = true;
+    instance.unmute(rule, null, delayed);
+    this.unmuteTimeout = null;
+  }
+
+  getVideoTextTrack(video, rule, ruleKey = 'videoCueLanguage') {
+    if (video.textTracks && video.textTracks.length > 0) {
+      for (let i = 0; i < video.textTracks.length; i++) {
+        let textTrackKey;
+
+        switch (ruleKey) {
+          case 'videoCueLanguage':
+            textTrackKey = 'language';
+            break;
+
+          case 'videoCueLabel':
+            textTrackKey = 'label';
+            break;
+
+          case 'externalSubTrackLabel':
+            textTrackKey = 'label';
+            break;
+        }
+
+        if (this.matchTextTrack(video.textTracks[i], rule, textTrackKey, ruleKey)) {
+          return video.textTracks[i];
+        }
+      }
+    }
+  } // Some sites ignore textTrack.mode = 'hidden' and will still show captions
+  // This is a fallback (not preferred) method that can be used for hiding the cues
+
+
+  hideCue(rule, cue) {
+    if (rule.showSubtitles === _constants.default.ShowSubtitles.Filtered && !cue.filtered || rule.showSubtitles === _constants.default.ShowSubtitles.Unfiltered && cue.filtered || rule.showSubtitles === _constants.default.ShowSubtitles.None) {
+      cue.text = '';
+      cue.position = 100;
+      cue.size = 0;
+    }
+  }
+
+  hideSubtitles(rule, subtitles) {
+    if (rule.displaySelector) {
+      let root = rule.rootNode && subtitles && subtitles[0] ? subtitles[0].getRootNode() : document;
+
+      if (root) {
+        let container = root.querySelector(rule.displaySelector);
+
+        if (container) {
+          // Save the original display style if none was included in the rule
+          if (rule.displayShow === '' && container.style.display !== '' && container.style.display !== rule.displayHide) {
+            rule.displayShow = container.style.display;
+          }
+
+          container.style.setProperty('display', rule.displayHide); // , 'important');
+        }
+      }
+    } else if (subtitles) {
+      subtitles.forEach(subtitle => {
+        subtitle.innerText = '';
+
+        if (rule.removeSubtitleSpacing && subtitle.style) {
+          if (subtitle.style.padding) {
+            subtitle.style.padding = 0;
+          }
+
+          if (subtitle.style.margin) {
+            subtitle.style.margin = 0;
+          }
+        }
+      });
+    }
+  }
+
+  initCueRule(rule) {
+    if (rule.videoSelector === undefined) {
+      rule.videoSelector = WebAudio.DefaultVideoSelector;
+    }
+
+    if (rule.videoCueRequireShowing === undefined) {
+      rule.videoCueRequireShowing = this.filter.cfg.muteCueRequireShowing;
+    }
+
+    if (rule.externalSub) {
+      if (rule.externalSubURLKey === undefined) {
+        rule.externalSubURLKey = 'url';
+      }
+
+      if (rule.externalSubFormatKey === undefined) {
+        rule.externalSubFormatKey = 'format';
+      }
+
+      if (rule.externalSubTrackLabel === undefined) {
+        rule.externalSubTrackLabel = 'APF';
+      }
+    }
+  }
+
+  initDisplaySelector(rule) {
+    if (rule.displaySelector !== undefined) {
+      if (rule.displayHide === undefined) {
+        rule.displayHide = 'none';
+      }
+
+      if (rule.displayShow === undefined) {
+        rule.displayShow = '';
+      }
+    }
+  }
+
+  initElementChildRule(rule) {
+    if (!rule.parentSelector && !rule.parentSelectorAll) {
+      rule.disabled = true;
+    }
+
+    this.initDisplaySelector(rule);
+  }
+
+  initElementRule(rule) {
+    this.initDisplaySelector(rule);
+  }
+
+  initRules() {
+    this.rules.forEach((rule, index) => {
+      if (rule.mode === undefined || (rule.mode == 'element' || rule.mode == 'elementChild') && !rule.tagName // Skip this rule if it doesn't apply to the current page
+      || rule.iframe === true && this.filter.iframe == null || rule.iframe === false && this.filter.iframe != null) {
+        rule.disabled = true;
+      }
+
+      if (!rule.disabled) {
+        // Setup rule defaults
+        if (rule.filterSubtitles == null) {
+          rule.filterSubtitles = true;
+        } // Allow rules to override global settings
+
+
+        if (rule.muteMethod == null) {
+          rule.muteMethod = this.filter.cfg.muteMethod;
+        }
+
+        if (rule.showSubtitles == null) {
+          rule.showSubtitles = this.filter.cfg.showSubtitles;
+        } // Ensure proper rule values
+
+
+        if (rule.tagName != null && rule.tagName != '#text') {
+          rule.tagName = rule.tagName.toUpperCase();
+        }
+
+        switch (rule.mode) {
+          case 'cue':
+            this.initCueRule(rule);
+
+            if (!rule.disabled) {
+              this.cueRuleIds.push(index);
+            }
+
+            break;
+
+          case 'elementChild':
+            this.initElementChildRule(rule);
+            break;
+
+          case 'element':
+            this.initElementRule(rule);
+            break;
+
+          case 'text':
+            this.initTextRule(rule);
+            break;
+
+          case 'watcher':
+            this.initWatcherRule(rule);
+
+            if (!rule.disabled) {
+              this.watcherRuleIds.push(index);
+            }
+
+            break;
+        }
+
+        if (!rule.disabled) {
+          this.enabledRuleIds.push(index);
+        }
+      }
+    });
+  }
+
+  initTextRule(rule) {
+    rule.tagName = '#text';
+
+    if (rule.simpleUnmute === undefined) {
+      rule.simpleUnmute = true;
+    }
+  }
+
+  initWatcherRule(rule) {
+    if (rule.checkInterval === undefined) {
+      rule.checkInterval = 20;
+    }
+
+    if (rule.ignoreMutations === undefined) {
+      rule.ignoreMutations = true;
+    }
+
+    if (rule.simpleUnmute === undefined) {
+      rule.simpleUnmute = true;
+    }
+
+    if (rule.videoSelector === undefined) {
+      rule.videoSelector = WebAudio.DefaultVideoSelector;
+    }
+
+    this.initDisplaySelector(rule);
+  }
+
+  matchTextTrack(textTrack, rule, textTrackKey, ruleKey) {
+    if (textTrack.cues.length > 0 && (!rule.videoCueRequireShowing || textTrack.mode === 'showing')) {
+      // Return true if both keys weren't provided, the rule doesn't have a have for key, or if both keys match the textTrack
+      return !textTrackKey || !ruleKey || !rule[ruleKey] || textTrack[textTrackKey] == rule[ruleKey];
+    }
+  }
+
+  mute(rule, video) {
+    if (!this.muted) {
+      this.muted = true;
+      let muteMethod = rule && rule.muteMethod >= 0 ? rule.muteMethod : this.filter.cfg.muteMethod;
+
+      switch (muteMethod) {
+        case _constants.default.MuteMethods.Tab:
+          chrome.runtime.sendMessage({
+            mute: true
+          });
+          break;
+
+        case _constants.default.MuteMethods.Video:
+          if (!video) {
+            video = document.querySelector(rule && rule.videoSelector ? rule.videoSelector : WebAudio.DefaultVideoSelector);
+          }
+
+          if (video && video.volume != null) {
+            this.volume = video.volume; // Save original volume
+
+            video.volume = 0;
+          }
+
+          break;
+      }
+    } // If we called mute and there is a delayedUnmute planned, clear it
+
+
+    if (rule && rule.unmuteDelay && this.unmuteTimeout) {
+      this.clearUnmuteTimeout(rule);
+    }
+  }
+
+  newCue(start, end, text, options = {}) {
+    try {
+      let cue = new VTTCue((0, _helper.hmsToSeconds)(start), (0, _helper.hmsToSeconds)(end), text);
+
+      if (options.align) {
+        cue.align = options.align;
+      }
+
+      if (options.line) {
+        cue.line = this.parseLineAndPositionSetting(options.line);
+      }
+
+      if (options.position) {
+        cue.position = this.parseLineAndPositionSetting(options.position);
+      }
+
+      return cue;
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(`APF: Failed to add cue: ( start: ${start}, end: ${end}, text: ${text} )`, e);
+    }
+  }
+
+  newTextTrack(rule, video, cues) {
+    if (video.textTracks) {
+      let track = video.addTextTrack('captions', rule.externalSubTrackLabel, rule.videoCueLanguage);
+      track.mode = 'showing';
+
+      for (let i = 0; i < cues.length; i++) {
+        track.addCue(cues[i]);
+      }
+
+      return track;
+    }
+  }
+
+  parseLineAndPositionSetting(setting) {
+    if (typeof setting == 'string' && setting != '') {
+      if (setting == 'auto') {
+        return 'auto';
+      } else {
+        return parseInt(setting);
+      }
+    }
+  }
+
+  parseSRT(srt) {
+    let lines = srt.trim().replace('\r\n', '\n').split(/[\r\n]/).map(function (line) {
+      return line.trim();
+    });
+    let cues = [];
+    let start = null;
+    let end = null;
+    let text = null;
+
+    for (let i = 0; i < lines.length; i++) {
+      if (lines[i].indexOf('-->') >= 0) {
+        let splitted = lines[i].split(/[ \t]+-->[ \t]+/);
+
+        if (splitted.length != 2) {
+          throw 'Error when splitting "-->": ' + lines[i];
+        }
+
+        start = splitted[0];
+        end = splitted[1];
+      } else if (lines[i] == '') {
+        if (start && end) {
+          let cue = this.newCue(start, end, text);
+          cues.push(cue);
+          start = null;
+          end = null;
+          text = null;
+        }
+      } else if (start && end) {
+        if (text == null) {
+          text = lines[i];
+        } else {
+          text += '\n' + lines[i];
+        }
+      }
+    }
+
+    if (start && end) {
+      let cue = this.newCue(start, end, text);
+      cues.push(cue);
+    }
+
+    return cues;
+  }
+
+  parseSSA(ssa) {
+    let cues = [];
+    let endIndex, startIndex, textIndex;
+    let foundEvents = false;
+    let lines = ssa.split('\n');
+
+    for (let i = 0; i < lines.length; i++) {
+      if (!foundEvents) {
+        if (lines[i].match(/^\[Events\]/i)) {
+          foundEvents = true;
+        }
+
+        continue;
+      }
+
+      if (lines[i].match(/^format:/i)) {
+        let format = lines[i].trim().split(',');
+        endIndex = format.indexOf('End');
+        startIndex = format.indexOf('Start');
+        textIndex = format.indexOf('Text');
+      } else if (lines[i].match(/^dialogue:/i)) {
+        let line = lines[i].trim().split(',');
+        let start = line[startIndex];
+        let end = line[endIndex];
+        let cleanText = line.slice(textIndex).join(',').replace(/\{\\\w.+?\}/g, '').split('\\N').reverse(); // Cleanup formatting and convert newlines
+
+        for (let j = 0; j < cleanText.length; j++) {
+          cues.push(this.newCue(start, end, cleanText[j]));
+        }
+      }
+    }
+
+    return cues;
+  }
+
+  parseVTT(input) {
+    let cues = [];
+    let lines = input.split('\n');
+    let separator = new RegExp('\\s-->\\s');
+
+    for (let i = 0; i < lines.length; i++) {
+      let line = lines[i].trim();
+
+      if (line.match(separator)) {
+        // Timestamp [& option] line
+        let parts = line.replace(separator, ' ').split(' ');
+        let [start, end, ...extraOptions] = parts;
+        start = start.replace(',', '.');
+        end = end.replace(',', '.');
+        let options = extraOptions.map(o => o.split(':')).reduce((acc, cur) => {
+          acc[cur[0]] = cur[1];
+          return acc;
+        }, {}); // Get text
+
+        let prevLine = lines[i - 1].trim();
+        let nextLine = lines[i + 1].trim();
+        let textStartRegex = new RegExp(`^<[cs]\\.${prevLine}>`);
+        let textEndRegex = new RegExp('<\/[cs]>$');
+        let text;
+
+        if (nextLine.match(textStartRegex)) {
+          text = nextLine.replace(textStartRegex, '').replace(textEndRegex, '');
+        } else {
+          text = nextLine;
+        } // Handle the case when there are multiple cues that should be shown concurrently
+        // The first line of the entry could look like "Caption-C8_1", and the subsequent entry would be "Caption-C8_2"
+
+
+        if (prevLine && !prevLine.match(/_1$/)) {
+          let previousCue = cues[cues.length - 1]; // If they share an endTime with the previous cue, but startTimes are different, make them match
+
+          if (previousCue.startTime != (0, _helper.hmsToSeconds)(start) && previousCue.endTime == (0, _helper.hmsToSeconds)(end)) {
+            start = (0, _helper.secondsToHMS)(previousCue.startTime);
+          }
+        }
+
+        let cue = this.newCue(start, end, text, options); // Concurrent cues seem to be displayed backwards, so we'll reverse them: [a,b,c] -> [c,b,a]
+
+        if (prevLine && !prevLine.match(/_1$/)) {
+          let concurrentNumber = parseInt(prevLine.match(/_([2-9])$/)[1]);
+          let firstConcurrentCueIndex = cues.length - concurrentNumber + 1; // Find the first concurrent index
+
+          cues.splice(firstConcurrentCueIndex, 0, cue);
+        } else {
+          cues.push(cue);
+        }
+
+        i++; // Skip the next line because we already processed the text
+      }
+    }
+
+    return cues;
+  }
+
+  playing(video) {
+    return !!(video && video.currentTime > 0 && !video.paused && !video.ended && video.readyState > 2);
+  }
+
+  processCues(cues, rule) {
+    for (let i = 0; i < cues.length; i++) {
+      let cue = cues[i];
+
+      if (cue.hasOwnProperty('filtered')) {
+        continue;
+      }
+
+      if (rule.videoCueSync) {
+        cue.startTime += rule.videoCueSync;
+        cue.endTime += rule.videoCueSync;
+      }
+
+      let result = this.replaceTextResult(cue.text);
+
+      if (result.modified) {
+        cue.filtered = true;
+        cue.originalText = cue.text;
+        cue.text = result.filtered;
+      } else {
+        cue.filtered = false;
+      }
+
+      if (rule.videoCueHideCues) {
+        this.hideCue(rule, cue);
+      }
+    }
+  }
+
+  async processExternalSub(video, rule) {
+    let textTrack = this.getVideoTextTrack(video, rule, 'externalSubTrackLabel');
+
+    if (!this.fetching && !textTrack) {
+      try {
+        let subsData = (0, _helper.getGlobalVariable)(rule.externalSubVar);
+
+        if (Array.isArray(subsData)) {
+          let found = subsData.find(subtitle => subtitle.language === rule.videoCueLanguage);
+
+          if (!found) {
+            throw `Failed to find subtitle for language: ${rule.videoCueLanguage}.`;
+          }
+
+          this.fetching = true;
+          let subs = await (0, _helper.makeRequest)('GET', found[rule.externalSubURLKey]);
+
+          if (typeof subs == 'string' && subs) {
+            let parsedCues;
+
+            switch (found[rule.externalSubFormatKey]) {
+              case 'ass':
+                parsedCues = this.parseSSA(subs);
+                break;
+
+              case 'srt':
+                parsedCues = this.parseSRT(subs);
+                break;
+
+              case 'vtt':
+                parsedCues = this.parseVTT(subs);
+                break;
+
+              default:
+                throw `Unsupported subtitle type: ${found[rule.externalSubFormatKey]}`;
+            }
+
+            if (parsedCues) {
+              let track = this.newTextTrack(rule, video, parsedCues);
+              let cues = track.cues;
+              this.processCues(cues, rule);
+              this.fetching = false; // Hide old captions/subtitles
+
+              if (rule.displaySelector) {
+                let oldSubtitlesContainer = document.querySelector(rule.displaySelector);
+
+                if (oldSubtitlesContainer) {
+                  oldSubtitlesContainer.style.display = 'none';
+                }
+              }
+            }
+          } else {
+            throw 'Failed to download external subtitles.';
+          }
+        } else {
+          throw `Failed to find subtitle variable: ${rule.externalSubVar}`;
+        }
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error('APF: Error using external subtitles. ', e);
+      }
+    }
+  }
+
+  processWatcherCaptions(rule, captions, data) {
+    let instance = this;
+    let initialCall = data.initialCall; // Check if this is the first call
+
+    if (initialCall) {
+      // Don't process the same filter again
+      if (instance.lastProcessedText && instance.lastProcessedText === captions.textContent) {
+        data.skipped = true;
+        return false;
+      } else {
+        // These are new captions, unmute if muted
+        instance.unmute(rule);
+        instance.lastProcessedText = '';
+      }
+
+      data.initialCall = false;
+      data.filtered = false;
+    }
+
+    if (captions.hasChildNodes()) {
+      captions.childNodes.forEach(child => {
+        instance.processWatcherCaptions(rule, child, data);
+      });
+    } else {
+      // Process child
+      // innerText handles line feeds/spacing better, but is not available to #text nodes
+      let textMethod = (captions && captions.nodeName) === '#text' ? 'textContent' : 'innerText'; // Don't process empty/whitespace nodes
+
+      if (captions[textMethod] && captions[textMethod].trim()) {
+        let result = instance.replaceTextResult(captions[textMethod]);
+
+        if (result.modified) {
+          instance.mute(rule);
+          data.filtered = true;
+
+          if (rule.filterSubtitles) {
+            captions[textMethod] = result.filtered;
+          }
+        }
+      }
+    }
+
+    if (initialCall) {
+      instance.lastProcessedText = captions.textContent;
+    }
+  }
+
+  replaceTextResult(string, stats = true) {
+    return this.filter.replaceTextResult(string, this.wordlistId, stats);
+  }
+
+  showSubtitles(rule, subtitles) {
+    if (rule.displaySelector) {
+      let root = rule.rootNode && subtitles && subtitles[0] ? subtitles[0].getRootNode() : document;
+
+      if (root) {
+        let container = root.querySelector(rule.displaySelector);
+
+        if (container) {
+          container.style.setProperty('display', rule.displayShow);
+        }
+      }
+    }
+  } // Checks if a node is a supported audio node.
+  // Returns rule id upon first match, otherwise returns false
+
+
+  supportedNode(node) {
+    for (let i = 0; i < this.enabledRuleIds.length; i++) {
+      let ruleId = this.enabledRuleIds[i];
+      let rule = this.rules[ruleId];
+
+      switch (rule.mode) {
+        case 'element':
+          if (node.nodeName == rule.tagName) {
+            let failed = false;
+
+            if (!failed && rule.className && (!node.className || !node.classList.contains(rule.className))) {
+              failed = true;
+            }
+
+            if (!failed && rule.dataPropPresent && (!node.dataset || !node.dataset.hasOwnProperty(rule.dataPropPresent))) {
+              failed = true;
+            }
+
+            if (!failed && rule.hasChildrenElements && (typeof node.childElementCount !== 'number' || node.childElementCount == 0)) {
+              failed = true;
+            }
+
+            if (!failed && rule.subtitleSelector && (typeof node.querySelector !== 'function' || !node.querySelector(rule.subtitleSelector))) {
+              failed = true;
+            }
+
+            if (!failed && rule.containsSelector && (typeof node.querySelector !== 'function' || !node.querySelector(rule.containsSelector))) {
+              failed = true;
+            }
+
+            if (!failed) {
+              return ruleId;
+            }
+          }
+
+          break;
+
+        case 'elementChild':
+          if (node.nodeName === rule.tagName) {
+            let root = rule.rootNode ? node.getRootNode() : document;
+
+            if (root) {
+              if (rule.parentSelector) {
+                let parent = root.querySelector(rule.parentSelector);
+
+                if (parent && parent.contains(node)) {
+                  return ruleId;
+                }
+              } else {
+                let parents = root.querySelectorAll(rule.parentSelectorAll);
+
+                for (let j = 0; j < parents.length; j++) {
+                  if (parents[j].contains(node)) {
+                    return ruleId;
+                  }
+                }
+              }
+            }
+          }
+
+          break;
+
+        case 'text':
+          if (node.nodeName === rule.tagName) {
+            let parent = document.querySelector(rule.parentSelector);
+
+            if (parent && parent.contains(node)) {
+              return ruleId;
+            }
+          }
+
+          break;
+
+        case 'watcher':
+          if (node.parentElement && node.parentElement == document.querySelector(rule.subtitleSelector)) {
+            return ruleId;
+          }
+
+          if (rule.parentSelector != null) {
+            let parent = document.querySelector(rule.parentSelector);
+
+            if (parent && parent.contains(node)) {
+              return ruleId;
+            }
+          }
+
+          break;
+      }
+    } // No matching rule was found
+
+
+    return false;
+  }
+
+  unmute(rule, video, delayed = false) {
+    if (this.muted) {
+      // If we haven't already delayed unmute and we should (rule.unmuteDelay), set the timeout
+      if (!delayed && rule && rule.unmuteDelay >= 0) {
+        // If unmute is called after an unmute has been scheduled, remove the older one and schedule a new unmute
+        if (this.unmuteTimeout == null) {
+          this.clearUnmuteTimeout(rule);
+        }
+
+        this.unmuteTimeout = window.setTimeout(this.delayedUnmute, rule.unmuteDelay, this, rule);
+        return;
+      }
+
+      this.muted = false;
+      let muteMethod = rule && rule.muteMethod >= 0 ? rule.muteMethod : this.filter.cfg.muteMethod;
+
+      switch (muteMethod) {
+        case _constants.default.MuteMethods.Tab:
+          chrome.runtime.sendMessage({
+            mute: false
+          });
+          break;
+
+        case _constants.default.MuteMethods.Video:
+          if (!video) {
+            video = document.querySelector(rule && rule.videoSelector ? rule.videoSelector : WebAudio.DefaultVideoSelector);
+          }
+
+          if (video && video.volume != null) {
+            video.volume = this.volume;
+          }
+
+          break;
+      }
+    }
+  }
+
+  watcher(instance, ruleId = 0) {
+    let rule = instance.rules[ruleId];
+    let video = document.querySelector(rule.videoSelector);
+
+    if (video && instance.playing(video)) {
+      if (rule.ignoreMutations) {
+        instance.filter.stopObserving();
+      } // Stop observing when video is playing
+
+
+      let captions = document.querySelector(rule.subtitleSelector);
+
+      if (captions && captions.textContent && captions.textContent.trim()) {
+        let data = {
+          initialCall: true
+        };
+        instance.processWatcherCaptions(rule, captions, data);
+
+        if (data.skipped) {
+          return false;
+        } // Hide/show captions/subtitles
+
+
+        switch (rule.showSubtitles) {
+          case _constants.default.ShowSubtitles.Filtered:
+            if (data.filtered) {
+              instance.showSubtitles(rule);
+            } else {
+              instance.hideSubtitles(rule);
+            }
+
+            break;
+
+          case _constants.default.ShowSubtitles.Unfiltered:
+            if (data.filtered) {
+              instance.hideSubtitles(rule);
+            } else {
+              instance.showSubtitles(rule);
+            }
+
+            break;
+
+          case _constants.default.ShowSubtitles.None:
+            instance.hideSubtitles(rule);
+            break;
+        }
+
+        if (data.filtered) {
+          instance.filter.updateCounterBadge();
+        }
+      } else if (rule.simpleUnmute) {
+        // If there are no captions/subtitles: unmute and hide
+        instance.unmute(rule, video);
+
+        if (rule.showSubtitles > 0) {
+          instance.hideSubtitles(rule);
+        }
+      }
+    } else {
+      if (rule.ignoreMutations) {
+        instance.filter.startObserving();
+      } // Start observing when video is not playing
+
+    }
+  }
+
+  watchForVideo(instance) {
+    for (let x = 0; x < instance.cueRuleIds.length; x++) {
+      let rule = instance.rules[x];
+      let video = document.querySelector(rule.videoSelector);
+
+      if (video && video.textTracks && instance.playing(video)) {
+        if (rule.externalSub) {
+          instance.processExternalSub(video, rule);
+        }
+
+        let ruleKey = rule.externalSub ? 'externalSubTrackLabel' : 'videoCueLanguage';
+        let textTrack = instance.getVideoTextTrack(video, rule, ruleKey);
+
+        if (textTrack && !textTrack.oncuechange) {
+          if (!rule.videoCueHideCues && rule.showSubtitles === _constants.default.ShowSubtitles.None) {
+            textTrack.mode = 'hidden';
+          }
+
+          textTrack.oncuechange = () => {
+            if (textTrack.activeCues && textTrack.activeCues.length > 0) {
+              let filtered = false;
+
+              for (let i = 0; i < textTrack.activeCues.length; i++) {
+                let activeCue = textTrack.activeCues[i];
+
+                if (!activeCue.hasOwnProperty('filtered')) {
+                  let cues = textTrack.cues;
+                  instance.processCues(cues, rule);
+                }
+
+                if (activeCue.filtered) {
+                  filtered = true;
+                  instance.mute(rule, video);
+                }
+              }
+
+              if (!filtered) {
+                instance.unmute(rule, video);
+              }
+
+              if (!rule.videoCueHideCues) {
+                if (filtered) {
+                  switch (rule.showSubtitles) {
+                    case _constants.default.ShowSubtitles.Filtered:
+                      textTrack.mode = 'showing';
+                      break;
+
+                    case _constants.default.ShowSubtitles.Unfiltered:
+                      textTrack.mode = 'hidden';
+                      break;
+                  }
+                } else {
+                  switch (rule.showSubtitles) {
+                    case _constants.default.ShowSubtitles.Filtered:
+                      textTrack.mode = 'hidden';
+                      break;
+
+                    case _constants.default.ShowSubtitles.Unfiltered:
+                      textTrack.mode = 'showing';
+                      break;
+                  }
+                }
+              }
+            } else {
+              // No active cues
+              instance.unmute(rule, video);
+            }
+          };
+        }
+      }
+    }
+  }
+
+  youTubeAutoSubsCurrentRow(node) {
+    return !!(node.parentElement.parentElement == node.parentElement.parentElement.parentElement.lastChild);
+  }
+
+  youTubeAutoSubsMuteTimeout(instance) {
+    let video = window.document.querySelector(WebAudio.DefaultVideoSelector);
+
+    if (video && instance.playing(video)) {
+      instance.unmute();
+    }
+
+    instance.youTubeAutoSubsTimeout = null;
+  }
+
+  youTubeAutoSubsNodeIsSubtitleText(node) {
+    let captionWindow = document.querySelector('div.caption-window'); // YouTube Auto-gen subs
+
+    return !!(captionWindow && captionWindow.contains(node));
+  }
+
+  youTubeAutoSubsPresent() {
+    return !!document.querySelector('div.ytp-caption-window-rollup');
+  }
+
+  youTubeAutoSubsSupportedNode(node) {
+    if (node.nodeName == '#text' && node.textContent != '') {
+      return !!this.youTubeAutoSubsNodeIsSubtitleText(node);
+    }
+
+    return false;
+  }
+
+}
+
+exports.default = WebAudio;
+
+_defineProperty(WebAudio, "brTagRegExp", new RegExp('<br>', 'i'));
+
+_defineProperty(WebAudio, "DefaultVideoSelector", 'video');
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports) {
+
+// findAndReplaceDOMText v 0.4.6
+// @author James Padolsey http://james.padolsey.com
+// @license http://unlicense.org/UNLICENSE
+//
+// Matches the text of a DOM node against a regular expression
+// and replaces each match (or node-separated portions of the match)
+// in the specified element.
+(function (root, factory) {
+  // APF: Only run in a browser
+  // if (typeof module === 'object' && module.exports) {
+  //   // Node/CommonJS
+  //   module.exports = factory();
+  // } else if (typeof define === 'function' && define.amd) {
+  //   // AMD. Register as an anonymous module.
+  //   define(factory);
+  // } else {
+  //   // Browser globals
+  //   root.findAndReplaceDOMText = factory();
+  // }
+
+  // APF: Only run in a browser
+  if (typeof window !== 'undefined') {
+    // Attach function to global scope
+    window.findAndReplaceDOMText = factory();
+  }
+}(this, function factory() {
+
+  var PORTION_MODE_RETAIN = 'retain';
+  var PORTION_MODE_FIRST = 'first';
+
+  var doc = document;
+  var hasOwn = {}.hasOwnProperty;
+
+  function escapeRegExp(s) {
+    return String(s).replace(/([.*+?^=!:${}()|[\]\/\\])/g, '\\$1');
+  }
+
+  function exposed() {
+    // Try deprecated arg signature first:
+    return deprecated.apply(null, arguments) || findAndReplaceDOMText.apply(null, arguments);
+  }
+
+  function deprecated(regex, node, replacement, captureGroup, elFilter) {
+    if ((node && !node.nodeType) && arguments.length <= 2) {
+      return false;
+    }
+    var isReplacementFunction = typeof replacement == 'function';
+
+    if (isReplacementFunction) {
+      replacement = (function(original) {
+        return function(portion, match) {
+          return original(portion.text, match.startIndex);
+        };
+      }(replacement));
+    }
+
+    // Awkward support for deprecated argument signature (<0.4.0)
+    var instance = findAndReplaceDOMText(node, {
+
+      find: regex,
+
+      wrap: isReplacementFunction ? null : replacement,
+      replace: isReplacementFunction ? replacement : '$' + (captureGroup || '&'),
+
+      prepMatch: function(m, mi) {
+
+        // Support captureGroup (a deprecated feature)
+
+        if (!m[0]) throw 'findAndReplaceDOMText cannot handle zero-length matches';
+
+        if (captureGroup > 0) {
+          var cg = m[captureGroup];
+          m.index += m[0].indexOf(cg);
+          m[0] = cg;
+        }
+
+        m.endIndex = m.index + m[0].length;
+        m.startIndex = m.index;
+        m.index = mi;
+
+        return m;
+      },
+      filterElements: elFilter
+    });
+
+    exposed.revert = function() {
+      return instance.revert();
+    };
+
+    return true;
+  }
+
+  /**
+* findAndReplaceDOMText
+*
+* Locates matches and replaces with replacementNode
+*
+* @param {Node} node Element or Text node to search within
+* @param {RegExp} options.find The regular expression to match
+* @param {String|Element} [options.wrap] A NodeName, or a Node to clone
+* @param {String} [options.wrapClass] A classname to append to the wrapping element
+* @param {String|Function} [options.replace='$&'] What to replace each match with
+* @param {Function} [options.filterElements] A Function to be called to check whether to
+*	process an element. (returning true = process element,
+*	returning false = avoid element)
+*/
+  function findAndReplaceDOMText(node, options) {
+    return new Finder(node, options);
+  }
+
+  exposed.NON_PROSE_ELEMENTS = {
+    br:1, hr:1,
+    // Media / Source elements:
+    script:1, style:1, img:1, video:1, audio:1, canvas:1, svg:1, map:1, object:1,
+    // Input elements
+    input:1, textarea:1, select:1, option:1, optgroup: 1, button:1
+  };
+
+  exposed.NON_CONTIGUOUS_PROSE_ELEMENTS = {
+
+    // Elements that will not contain prose or block elements where we don't
+    // want prose to be matches across element borders:
+
+    // Block Elements
+    address:1, article:1, aside:1, blockquote:1, dd:1, div:1,
+    dl:1, fieldset:1, figcaption:1, figure:1, footer:1, form:1, h1:1, h2:1, h3:1,
+    h4:1, h5:1, h6:1, header:1, hgroup:1, hr:1, main:1, nav:1, noscript:1, ol:1,
+    output:1, p:1, pre:1, section:1, ul:1,
+    // Other misc. elements that are not part of continuous inline prose:
+    br:1, li: 1, summary: 1, dt:1, details:1, rp:1, rt:1, rtc:1,
+    // Media / Source elements:
+    script:1, style:1, img:1, video:1, audio:1, canvas:1, svg:1, map:1, object:1,
+    // Input elements
+    input:1, textarea:1, select:1, option:1, optgroup:1, button:1,
+    // Table related elements:
+    table:1, tbody:1, thead:1, th:1, tr:1, td:1, caption:1, col:1, tfoot:1, colgroup:1
+
+  };
+
+  exposed.NON_INLINE_PROSE = function(el) {
+    return hasOwn.call(exposed.NON_CONTIGUOUS_PROSE_ELEMENTS, el.nodeName.toLowerCase());
+  };
+
+  // Presets accessed via `options.preset` when calling findAndReplaceDOMText():
+  exposed.PRESETS = {
+    prose: {
+      forceContext: exposed.NON_INLINE_PROSE,
+      filterElements: function(el) {
+        return !hasOwn.call(exposed.NON_PROSE_ELEMENTS, el.nodeName.toLowerCase());
+      }
+    }
+  };
+
+  exposed.Finder = Finder;
+
+  /**
+* Finder -- encapsulates logic to find and replace.
+*/
+  function Finder(node, options) {
+
+    var preset = options.preset && exposed.PRESETS[options.preset];
+
+    options.portionMode = options.portionMode || PORTION_MODE_RETAIN;
+
+    if (preset) {
+      for (var i in preset) {
+        if (hasOwn.call(preset, i) && !hasOwn.call(options, i)) {
+          options[i] = preset[i];
+        }
+      }
+    }
+
+    this.node = node;
+    this.options = options;
+
+    // Enable match-preparation method to be passed as option:
+    this.prepMatch = options.prepMatch || this.prepMatch;
+
+    this.reverts = [];
+
+    this.matches = this.search();
+
+    if (this.matches.length) {
+      this.processMatches();
+    }
+
+  }
+
+  Finder.prototype = {
+
+    /**
+  * Searches for all matches that comply with the instance's 'match' option
+  */
+    search: function() {
+
+      var match;
+      var matchIndex = 0;
+      var offset = 0;
+      var regex = this.options.find;
+      var textAggregation = this.getAggregateText();
+      var matches = [];
+      var self = this;
+
+      regex = typeof regex === 'string' ? RegExp(escapeRegExp(regex), 'g') : regex;
+
+      matchAggregation(textAggregation);
+
+      function matchAggregation(textAggregation) {
+        for (var i = 0, l = textAggregation.length; i < l; ++i) {
+
+          var text = textAggregation[i];
+
+          if (typeof text !== 'string') {
+            // Deal with nested contexts: (recursive)
+            matchAggregation(text);
+            continue;
+          }
+
+          if (regex.global) {
+            while (match = regex.exec(text)) {
+              matches.push(self.prepMatch(match, matchIndex++, offset));
+            }
+          } else {
+            if (match = text.match(regex)) {
+              matches.push(self.prepMatch(match, 0, offset));
+            }
+          }
+
+          offset += text.length;
+        }
+      }
+
+      return matches;
+
+    },
+
+    /**
+  * Prepares a single match with useful meta info:
+  */
+    prepMatch: function(match, matchIndex, characterOffset) {
+
+      if (!match[0]) {
+        throw new Error('findAndReplaceDOMText cannot handle zero-length matches');
+      }
+
+      match.endIndex = characterOffset + match.index + match[0].length;
+      match.startIndex = characterOffset + match.index;
+      match.index = matchIndex;
+
+      return match;
+    },
+
+    /**
+  * Gets aggregate text within subject node
+  */
+    getAggregateText: function() {
+
+      var elementFilter = this.options.filterElements;
+      var forceContext = this.options.forceContext;
+
+      return getText(this.node);
+
+      /**
+    * Gets aggregate text of a node without resorting
+    * to broken innerText/textContent
+    */
+      function getText(node) {
+
+        if (node.nodeType === Node.TEXT_NODE) {
+          return [node.data];
+        }
+
+        if (elementFilter && !elementFilter(node)) {
+          return [];
+        }
+
+        var txt = [''];
+        var i = 0;
+
+        if (node = node.firstChild) do {
+
+          if (node.nodeType === Node.TEXT_NODE) {
+            txt[i] += node.data;
+            continue;
+          }
+
+          var innerText = getText(node);
+
+          if (
+            forceContext &&
+         node.nodeType === Node.ELEMENT_NODE &&
+         (forceContext === true || forceContext(node))
+          ) {
+            txt[++i] = innerText;
+            txt[++i] = '';
+          } else {
+            if (typeof innerText[0] === 'string') {
+              // Bridge nested text-node data so that they're
+              // not considered their own contexts:
+              // I.e. ['some', ['thing']] -> ['something']
+              txt[i] += innerText.shift();
+            }
+            if (innerText.length) {
+              txt[++i] = innerText;
+              txt[++i] = '';
+            }
+          }
+        } while (node = node.nextSibling);
+
+        return txt;
+
+      }
+
+    },
+
+    /**
+  * Steps through the target node, looking for matches, and
+  * calling replaceFn when a match is found.
+  */
+    processMatches: function() {
+
+      var matches = this.matches;
+      var node = this.node;
+      var elementFilter = this.options.filterElements;
+
+      var startPortion,
+        endPortion,
+        innerPortions = [],
+        curNode = node,
+        match = matches.shift(),
+        atIndex = 0, // i.e. nodeAtIndex
+        matchIndex = 0,
+        portionIndex = 0,
+        doAvoidNode,
+        nodeStack = [node];
+
+      out: while (true) {
+
+        if (curNode.nodeType === Node.TEXT_NODE) {
+
+          if (!endPortion && curNode.length + atIndex >= match.endIndex) {
+            // We've found the ending
+            // (Note that, in the case of a single portion, it'll be an
+            // endPortion, not a startPortion.)
+            endPortion = {
+              node: curNode,
+              index: portionIndex++,
+              text: curNode.data.substring(match.startIndex - atIndex, match.endIndex - atIndex),
+
+              // If it's the first match (atIndex==0) we should just return 0
+              indexInMatch: atIndex === 0 ? 0 : atIndex - match.startIndex,
+
+              indexInNode: match.startIndex - atIndex,
+              endIndexInNode: match.endIndex - atIndex,
+              isEnd: true
+            };
+
+          } else if (startPortion) {
+            // Intersecting node
+            innerPortions.push({
+              node: curNode,
+              index: portionIndex++,
+              text: curNode.data,
+              indexInMatch: atIndex - match.startIndex,
+              indexInNode: 0 // always zero for inner-portions
+            });
+          }
+
+          if (!startPortion && curNode.length + atIndex > match.startIndex) {
+            // We've found the match start
+            startPortion = {
+              node: curNode,
+              index: portionIndex++,
+              indexInMatch: 0,
+              indexInNode: match.startIndex - atIndex,
+              endIndexInNode: match.endIndex - atIndex,
+              text: curNode.data.substring(match.startIndex - atIndex, match.endIndex - atIndex)
+            };
+          }
+
+          atIndex += curNode.data.length;
+
+        }
+
+        doAvoidNode = curNode.nodeType === Node.ELEMENT_NODE && elementFilter && !elementFilter(curNode);
+
+        if (startPortion && endPortion) {
+
+          curNode = this.replaceMatch(match, startPortion, innerPortions, endPortion);
+
+          // processMatches has to return the node that replaced the endNode
+          // and then we step back so we can continue from the end of the
+          // match:
+
+          atIndex -= (endPortion.node.data.length - endPortion.endIndexInNode);
+
+          startPortion = null;
+          endPortion = null;
+          innerPortions = [];
+          match = matches.shift();
+          portionIndex = 0;
+          matchIndex++;
+
+          if (!match) {
+            break; // no more matches
+          }
+
+        } else if (
+          !doAvoidNode &&
+       (curNode.firstChild || curNode.nextSibling)
+        ) {
+          // Move down or forward:
+          if (curNode.firstChild) {
+            nodeStack.push(curNode);
+            curNode = curNode.firstChild;
+          } else {
+            curNode = curNode.nextSibling;
+          }
+          continue;
+        }
+
+        // Move forward or up:
+        while (true) {
+          if (curNode.nextSibling) {
+            curNode = curNode.nextSibling;
+            break;
+          }
+          curNode = nodeStack.pop();
+          if (curNode === node) {
+            break out;
+          }
+        }
+
+      }
+
+    },
+
+    /**
+  * Reverts ... TODO
+  */
+    revert: function() {
+      // Reversion occurs backwards so as to avoid nodes subsequently
+      // replaced during the matching phase (a forward process):
+      for (var l = this.reverts.length; l--;) {
+        this.reverts[l]();
+      }
+      this.reverts = [];
+    },
+
+    prepareReplacementString: function(string, portion, match) {
+      var portionMode = this.options.portionMode;
+      if (
+        portionMode === PORTION_MODE_FIRST &&
+     portion.indexInMatch > 0
+      ) {
+        return '';
+      }
+      string = string.replace(/\$(\d+|&|`|')/g, function($0, t) {
+        var replacement;
+        switch(t) {
+          case '&':
+            replacement = match[0];
+            break;
+          case '`':
+            replacement = match.input.substring(0, match.startIndex);
+            break;
+          case '\'':
+            replacement = match.input.substring(match.endIndex);
+            break;
+          default:
+            replacement = match[+t] || '';
+        }
+        return replacement;
+      });
+
+      if (portionMode === PORTION_MODE_FIRST) {
+        return string;
+      }
+
+      if (portion.isEnd) {
+        return string.substring(portion.indexInMatch);
+      }
+
+      return string.substring(portion.indexInMatch, portion.indexInMatch + portion.text.length);
+    },
+
+    getPortionReplacementNode: function(portion, match) {
+
+      var replacement = this.options.replace || '$&';
+      // APF: Disable replacement wrapper (not used)
+      // var wrapper = this.options.wrap;
+      // var wrapperClass = this.options.wrapClass;
+
+      // This is causing warnings due to unsafe innerHTML assignment
+      // if (wrapper && wrapper.nodeType) {
+      //   // Wrapper has been provided as a stencil-node for us to clone:
+      //   var clone = doc.createElement('div');
+      //   clone.innerHTML = wrapper.outerHTML || new XMLSerializer().serializeToString(wrapper);
+      //   wrapper = clone.firstChild;
+      // }
+
+      if (typeof replacement == 'function') {
+        replacement = replacement(portion, match);
+        if (replacement && replacement.nodeType) {
+          return replacement;
+        }
+        return doc.createTextNode(String(replacement));
+      }
+
+      // APF: Disable replacement wrapper (not used)
+      // var el = typeof wrapper == 'string' ? doc.createElement(wrapper) : wrapper;
+
+      // if (el && wrapperClass) {
+      //   el.className = wrapperClass;
+      // }
+
+      // replacement = doc.createTextNode(
+      //   this.prepareReplacementString(
+      //     replacement, portion, match
+      //   )
+      // );
+
+      // if (!replacement.data) {
+      //   return replacement;
+      // }
+
+      // if (!el) {
+      //   return replacement;
+      // }
+
+      // el.appendChild(replacement);
+
+      // return el;
+    },
+
+    replaceMatch: function(match, startPortion, innerPortions, endPortion) {
+
+      var matchStartNode = startPortion.node;
+      var matchEndNode = endPortion.node;
+
+      var precedingTextNode;
+      var followingTextNode;
+
+      if (matchStartNode === matchEndNode) {
+
+        var node = matchStartNode;
+
+        if (startPortion.indexInNode > 0) {
+          // Add `before` text node (before the match)
+          precedingTextNode = doc.createTextNode(node.data.substring(0, startPortion.indexInNode));
+          node.parentNode.insertBefore(precedingTextNode, node);
+        }
+
+        // Create the replacement node:
+        var newNode = this.getPortionReplacementNode(
+          endPortion,
+          match
+        );
+
+        node.parentNode.insertBefore(newNode, node);
+
+        if (endPortion.endIndexInNode < node.length) { // ?????
+          // Add `after` text node (after the match)
+          followingTextNode = doc.createTextNode(node.data.substring(endPortion.endIndexInNode));
+          node.parentNode.insertBefore(followingTextNode, node);
+        }
+
+        node.parentNode.removeChild(node);
+
+        this.reverts.push(function() {
+          if (precedingTextNode === newNode.previousSibling) {
+            precedingTextNode.parentNode.removeChild(precedingTextNode);
+          }
+          if (followingTextNode === newNode.nextSibling) {
+            followingTextNode.parentNode.removeChild(followingTextNode);
+          }
+          newNode.parentNode.replaceChild(node, newNode);
+        });
+
+        return newNode;
+
+      } else {
+        // Replace matchStartNode -> [innerMatchNodes...] -> matchEndNode (in that order)
+
+
+        precedingTextNode = doc.createTextNode(
+          matchStartNode.data.substring(0, startPortion.indexInNode)
+        );
+
+        followingTextNode = doc.createTextNode(
+          matchEndNode.data.substring(endPortion.endIndexInNode)
+        );
+
+        var firstNode = this.getPortionReplacementNode(
+          startPortion,
+          match
+        );
+
+        var innerNodes = [];
+
+        for (var i = 0, l = innerPortions.length; i < l; ++i) {
+          var portion = innerPortions[i];
+          var innerNode = this.getPortionReplacementNode(
+            portion,
+            match
+          );
+          portion.node.parentNode.replaceChild(innerNode, portion.node);
+          this.reverts.push((function(portion, innerNode) {
+            return function() {
+              innerNode.parentNode.replaceChild(portion.node, innerNode);
+            };
+          }(portion, innerNode)));
+          innerNodes.push(innerNode);
+        }
+
+        var lastNode = this.getPortionReplacementNode(
+          endPortion,
+          match
+        );
+
+        matchStartNode.parentNode.insertBefore(precedingTextNode, matchStartNode);
+        matchStartNode.parentNode.insertBefore(firstNode, matchStartNode);
+        matchStartNode.parentNode.removeChild(matchStartNode);
+
+        matchEndNode.parentNode.insertBefore(lastNode, matchEndNode);
+        matchEndNode.parentNode.insertBefore(followingTextNode, matchEndNode);
+        matchEndNode.parentNode.removeChild(matchEndNode);
+
+        this.reverts.push(function() {
+          precedingTextNode.parentNode.removeChild(precedingTextNode);
+          firstNode.parentNode.replaceChild(matchStartNode, firstNode);
+          followingTextNode.parentNode.removeChild(followingTextNode);
+          lastNode.parentNode.replaceChild(matchEndNode, lastNode);
+        });
+
+        return lastNode;
+      }
+    }
+
+  };
+
+  return exposed;
+
+}));
+
+/***/ })
+/******/ ]);
